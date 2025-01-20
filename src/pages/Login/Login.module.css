@@ -1,0 +1,74 @@
+.mainContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-grow: 1;
+  background-color: var(--a8);
+}
+
+.homeButton {
+  padding: 16px 32px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--w);
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  background-color: var(--a5);
+  border-radius: 16px;
+  padding: 40px 48px;
+  justify-content: center;
+}
+
+.title {
+  color: var(--w);
+  font-size: 32px;
+}
+
+.errorMessage {
+  color: var(--w);
+  font-size: 18px;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.bottomText {
+  font-size: 14px;
+  color: white;
+}
+
+.bottomText a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+@media (max-width: 480px) {
+  .homeButton {
+    padding: 20px 20px;
+    font-size: 20px;
+    line-height: 36px;
+  }
+  .mainContainer {
+    padding: 24px;
+  }
+  .contentContainer {
+    padding: 24px 24px;
+    width: 100%;
+  }
+  .errorMessage {
+    font-size: 16px;
+  }
+}

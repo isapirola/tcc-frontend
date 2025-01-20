@@ -1,0 +1,84 @@
+.defaultButton {
+  display: flex;
+  border-radius: 16px;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  font-size: 18px;
+  background-color: var(--a7);
+  color: white;
+  transition: background-color 0.3s, transform 0.2s;
+}
+.defaultButton:hover {
+  background-color: var(--a8);
+}
+.defaultButton:active {
+  transform: scale(0.95);
+}
+.defaultButton.disabled:active {
+  transform: none;
+}
+
+.task {
+  width: 100%;
+}
+.task.disabled {
+  background-color: var(--a6);
+  color: var(--a3);
+  cursor: default;
+}
+
+.timers {
+  width: 160px;
+  height: 48px;
+  background-color: var(--a4);
+  color: var(--a1);
+}
+.timers:hover {
+  background-color: var(--a7);
+}
+.timers.selected {
+  background-color: var(--a7);
+  color: var(--w);
+}
+.timers.disabled:hover {
+  cursor: default;
+  background-color: var(--a4);
+}
+.timers.selected.disabled:hover {
+  cursor: default;
+  background-color: var(--a7);
+}
+
+.login {
+  width: 240px;
+}
+
+.header {
+  background-color: transparent;
+}
+.header:hover {
+  transform: scale(1.1);
+}
+
+.timer {
+  padding: 8px 12px;
+  font-size: 16px;
+}
+
+.category {
+  height: auto;
+  font-size: 16px;
+  padding: 6px 16px;
+}
+
+@media (max-width: 480px) {
+  .defaultButton {
+    font-size: 16px;
+  }
+  .timers {
+    width: 100%;
+    font-size: 16px;
+    padding: 8px 8px;
+  }
+}

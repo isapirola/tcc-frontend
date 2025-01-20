@@ -1,0 +1,157 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+}
+
+.timerTypes {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.timerRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 48px;
+}
+
+.timerContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.timerCircle {
+  display: flex;
+  border-radius: 300px;
+  background-color: var(--a6);
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 300px;
+  margin-bottom: 16px;
+}
+
+.timerMinute {
+  display: flex;
+  flex-direction: row;
+  font-size: 40px;
+  color: var(--a1);
+}
+
+.timerHour {
+  display: flex;
+  flex-direction: row;
+  font-size: 32px;
+  color: var(--a1);
+}
+
+.timerButtonContainer {
+  display: flex;
+  padding: 0px 32px;
+  width: 100%;
+  justify-content: center;
+  gap: 16px;
+}
+
+.timerButton {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background-color: var(--a6);
+  padding: 8px;
+}
+
+.timerIcon {
+  height: 48px;
+  width: 48px;
+  fill: var(--a1);
+}
+
+.pomodoroButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tempContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tempInputs {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 8px;
+}
+
+.tempInputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 18px;
+  color: var(--a1);
+}
+
+.tempInput {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  font-size: 16px;
+  color: var(--a7);
+  font-weight: 800;
+  text-align: center;
+}
+
+/* Remove as setinhas no Chrome/Safari */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Remove as setinhas no Firefox */
+input[type="number"] {
+  appearance: none;
+  -moz-appearance: textfield;
+}
+
+@media (max-width: 480px) {
+  .mainContainer {
+    gap: 24px;
+  }
+  .timerRow {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .timerCircle {
+    width: 250px;
+    height: 250px;
+  }
+  .timerIcon {
+    height: 36px;
+    width: 36px;
+  }
+  .pomodoroButtons {
+    flex-direction: row;
+  }
+  .timerHour {
+    font-size: 28px;
+  }
+  .tempContainer {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+  .tempInputs {
+    gap: 16px;
+  }
+}
