@@ -11,3 +11,9 @@ export interface UserData {
   password: string;
   _id: string;
 }
+
+export interface CategoriesResponse {
+  name: string;
+  userId: string;
+  _id: string;
+}

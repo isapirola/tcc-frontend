@@ -1,6 +1,7 @@
+import { CategoriesResponse } from "../interfaces";
 import axiosInstance from "./axiosInstance";
 
-export const fetchCategories = async () => {
+export const fetchCategories = async (): Promise<CategoriesResponse[]> => {
   const response = await axiosInstance.get("/categories");
   return response.data.categories;
 };
