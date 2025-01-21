@@ -111,6 +111,7 @@ const Home: React.FC = () => {
         handleLogout={() => {
           setSelectedTaskId("");
           handleLogout();
+          window.location.reload();
         }}
       />
       <div className={styles.contentContainer}>
