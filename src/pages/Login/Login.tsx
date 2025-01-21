@@ -11,11 +11,13 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     setError("");
+    setLoading(true);
     try {
       const response = await login(email, password);
       const userData = {
@@ -28,6 +30,8 @@ const Login: React.FC = () => {
     } catch (err: any) {
       console.error("Erro durante o login:", err);
       setError(err.message || "Erro ao fazer login. Tente novamente.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -54,7 +58,11 @@ const Login: React.FC = () => {
           icon="password"
         />
         <div className={styles.buttonContainer}>
-          <Button label={"Login"} onClick={handleLogin} styleType="login" />
+          <Button
+            label={loading ? "Carregando..." : "Login"}
+            onClick={handleLogin}
+            styleType="login"
+          />
           <p className={styles.bottomText}>
             Não possui uma conta? <Link to={"/register"}>Registre-se</Link>
           </p>
