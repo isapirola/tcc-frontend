@@ -13,11 +13,13 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const handleRegister = async () => {
     setError("");
+    setLoading(true);
 
     if (password !== confirmPassword) {
       setError("As senhas não coincidem. Tente novamente.");
@@ -36,6 +38,8 @@ const Login: React.FC = () => {
     } catch (err: any) {
       console.error("Erro durante o registro:", err);
       setError(err.message || "Erro ao registrar. Tente novamente.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -76,7 +80,11 @@ const Login: React.FC = () => {
           icon="password"
         />
         <div className={styles.buttonContainer}>
-          <Button label={"Registrar"} onClick={handleRegister} styleType="login" />
+          <Button
+            label={loading ? "Carregando..." : "Registrar"}
+            onClick={handleRegister}
+            styleType="login"
+          />
           <p className={styles.bottomText}>
             Já possui uma conta? <Link to={"/login"}>Faça login</Link>
           </p>
