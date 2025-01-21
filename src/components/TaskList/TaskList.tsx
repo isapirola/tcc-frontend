@@ -27,11 +27,16 @@ const TaskList: React.FC<TaskListProps> = ({
   handleEditCategory,
   onToggleTaskCompletion,
 }) => {
-  const [openCategories, setOpenCategories] = useState(groupedTasks.map(() => true));
+  const [openCategories, setOpenCategories] = useState<boolean[]>([]);
   const [categoryToRename, setCategoryToRename] = useState<string | undefined>();
   const [categoryNameInput, setCategoryNameInput] = useState<string>("");
 
   const categoryInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    // Atualiza o estado quando groupedTasks mudar
+    setOpenCategories(groupedTasks.map(() => true));
+  }, [groupedTasks]);
 
   const toggleCategory = (index: number) => {
     setOpenCategories((prevState) => {
