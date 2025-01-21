@@ -39,6 +39,14 @@
   color: white;
 }
 
+.noCategoriesText {
+  padding: 0 48px;
+  text-align: center;
+  font-weight: 600;
+  color: var(--a1);
+  font-size: 28px;
+}
+
 .tasksFooter {
   display: flex;
   flex-direction: column;
@@ -178,6 +186,10 @@
   }
   .tasksFooter {
     gap: 12px;
+  }
+  .noCategoriesText {
+    font-size: 20px;
+    margin-top: 16px;
   }
   .notLoggedText {
     font-size: 20px;

@@ -117,7 +117,7 @@ const Home: React.FC = () => {
         <div className={styles.tasksContainer}>
           <div className={styles.tasksButtons}>
             <Button
-              isDisabled={!isLogged}
+              isDisabled={!isLogged || categories.length === 0}
               label={"+ Nova Tarefa"}
               onClick={() => {
                 setTaskToEdit(undefined);
@@ -141,16 +141,22 @@ const Home: React.FC = () => {
           )}
 
           {isLogged ? (
-            <TaskList
-              groupedTasks={groupedTasks}
-              onToggleTaskCompletion={handleToggleTaskCompletion}
-              selectedTaskId={selectedTaskId}
-              handleSelectedTask={handleTaskSelection}
-              handleEditTask={handleClickEditTask}
-              handleDeleteTask={handleDeleteTask}
-              handleEditCategory={handleUpdateCategory}
-              handleDeleteCategory={handleDeleteCategory}
-            />
+            categories.length > 0 ? (
+              <TaskList
+                groupedTasks={groupedTasks}
+                onToggleTaskCompletion={handleToggleTaskCompletion}
+                selectedTaskId={selectedTaskId}
+                handleSelectedTask={handleTaskSelection}
+                handleEditTask={handleClickEditTask}
+                handleDeleteTask={handleDeleteTask}
+                handleEditCategory={handleUpdateCategory}
+                handleDeleteCategory={handleDeleteCategory}
+              />
+            ) : (
+              <h2 className={styles.noCategoriesText}>
+                Crie uma nova categoria antes de adicionar tarefas
+              </h2>
+            )
           ) : (
             <h2 className={styles.notLoggedText}>
               Faça <Link to={"/login"}>login</Link> para adicionar e gerenciar suas tarefas
@@ -163,7 +169,7 @@ const Home: React.FC = () => {
             )}
             <span className={styles.horizontalSeparator} />
             <Button
-              isDisabled={!isLogged}
+              isDisabled={!isLogged || categories.length === 0}
               label={isFiltering ? "Fechar filtragem" : "Filtrar tarefas"}
               onClick={handleClickFilter}
             />
