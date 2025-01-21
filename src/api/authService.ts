@@ -1,9 +1,9 @@
-import { AuthResponse } from "../interfaces";
+import { AuthResponse, UserData } from "../interfaces";
 import axiosInstance from "./axiosInstance";
 
 export const login = async (email: string, password: string): Promise<AuthResponse> => {
   const response = await axiosInstance.post("/user/login", { email, password });
-  // Armazenar o access token e o refresh token
+
   localStorage.setItem("authToken", response.data.accessToken);
   localStorage.setItem("refreshToken", response.data.refreshToken);
 
@@ -16,16 +16,16 @@ export const register = async (
   password: string
 ): Promise<AuthResponse> => {
   const response = await axiosInstance.post("/user/register", { name, email, password });
-  // Armazenar o access token e o refresh token
+
   localStorage.setItem("authToken", response.data.accessToken);
   localStorage.setItem("refreshToken", response.data.refreshToken);
   return response.data;
 };
 
-export const getUserData = async () => {
+export const getUserData = async (): Promise<UserData> => {
   try {
     const response = await axiosInstance.get("/user/data");
-    return response.data; // Retorna os dados do usuário (incluindo refreshToken)
+    return response.data;
   } catch (error: any) {
     throw new Error("Erro ao obter dados do usuário: " + error.message);
   }
