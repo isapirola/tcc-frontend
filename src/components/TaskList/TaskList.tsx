@@ -27,7 +27,7 @@ const TaskList: React.FC<TaskListProps> = ({
   handleEditCategory,
   onToggleTaskCompletion,
 }) => {
-  const [openCategories, setOpenCategories] = useState(groupedTasks.map(() => false));
+  const [openCategories, setOpenCategories] = useState(groupedTasks.map(() => true));
   const [categoryToRename, setCategoryToRename] = useState<string | undefined>();
   const [categoryNameInput, setCategoryNameInput] = useState<string>("");
 
