@@ -169,14 +169,13 @@ const useTasks = () => {
       try {
         setLoading(true);
         // Atualiza a tarefa na API
-        const updatedCategory = await updateCategory(categoryId, categoryName);
+        const response = await updateCategory(categoryId, categoryName);
+        const updatedCategory = response.category;
 
         // Atualiza a tarefa no estado local
         setCategories((prevCategories) =>
           prevCategories.map((category) =>
-            category.id === categoryId
-              ? { ...category, ...updatedCategory.category }
-              : category
+            category.id === categoryId ? { ...category, ...updatedCategory } : category
           )
         );
 

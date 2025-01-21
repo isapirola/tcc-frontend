@@ -20,7 +20,10 @@ export const fetchCategoryDuration = async (categoryId: string): Promise<number>
   return response.data;
 };
 
-export const updateCategory = async (categoryId: string, categoryName: string) => {
+export const updateCategory = async (
+  categoryId: string,
+  categoryName: string
+): Promise<CategoryResponse> => {
   try {
     const response = await axiosInstance.put(`/categories/${categoryId}`, {
       name: categoryName,
