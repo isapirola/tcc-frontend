@@ -144,12 +144,12 @@ const ModalNewTask: React.FC<ModalNewTaskProps> = ({
           </div>
         </div>
         <div className={styles.inputContainer}>
-          <p className={styles.inputTitle}>Duração (em minutos)</p>
+          <p className={styles.inputTitle}>Tempo percorrido (em minutos)</p>
           <input
             className={styles.input}
             value={Math.floor(duration / 60)}
             onChange={(e) => setDuration(Number(e.target.value) * 60)}
-            placeholder="Digite a duração da tarefa"
+            placeholder="Digite a duração percorrida da tarefa"
           />
         </div>
         <div className={styles.inputContainer}>
