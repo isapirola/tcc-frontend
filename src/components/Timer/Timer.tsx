@@ -109,8 +109,10 @@ const Timer: React.FC<TimerProps> = ({ handleTimerStop }) => {
   };
 
   const stopTimer = () => {
-    if (isPomodoro && selectedPomodoroType === 0) {
-      handleTimerStop(initialTime * 60 - (minutes * 60 + seconds));
+    if (isPomodoro) {
+      if (selectedPomodoroType === 0) {
+        handleTimerStop(initialTime * 60 - (minutes * 60 + seconds));
+      }
     } else if (isCronometer) {
       handleTimerStop(minutes * 60 + seconds);
     } else {

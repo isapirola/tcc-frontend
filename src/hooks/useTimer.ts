@@ -8,49 +8,14 @@ interface UseTimerProps {
 
 const useTimer = ({ initialMinutes, onTimerEnd, isIncremental = false }: UseTimerProps) => {
   const [timeLeft, setTimeLeft] = useState<number>(initialMinutes * 60);
-  // const [minutes, setMinutes] = useState<number>(initialMinutes);
-  // const [seconds, setSeconds] = useState<number>(0);
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [isPaused, setIsPaused] = useState<boolean>(false);
 
   const startTimestamp = useRef<number | null>(null); // Para armazenar o tempo inicial
 
-  // useEffect(() => {
-  //   let timer: ReturnType<typeof setInterval>;
-
-  //   if (isRunning && !isPaused) {
-  //     timer = setInterval(() => {
-  //       setSeconds((prevSeconds) => {
-  //         if (!isIncremental) {
-  //           // Contagem regressiva
-  //           if (prevSeconds === 0) {
-  //             if (minutes === 0) {
-  //               clearInterval(timer);
-  //               setIsRunning(false);
-  //               if (onTimerEnd) {
-  //                 onTimerEnd(); // Chama a função de fim de timer
-  //               }
-  //               return 0;
-  //             } else {
-  //               setMinutes((prevMinutes) => prevMinutes - 1);
-  //               return 59;
-  //             }
-  //           }
-  //           return prevSeconds - 1;
-  //         } else {
-  //           // Contagem progressiva
-  //           if (prevSeconds === 59) {
-  //             setMinutes((prevMinutes) => prevMinutes + 1);
-  //             return 0;
-  //           }
-  //           return prevSeconds + 1;
-  //         }
-  //       });
-  //     }, 1000);
-  //   }
-
-  //   return () => clearInterval(timer);
-  // }, [isRunning, isPaused, minutes, isIncremental, onTimerEnd]);
+  useEffect(() => {
+    setTimeLeft(initialMinutes * 60);
+  }, [initialMinutes]);
 
   useEffect(() => {
     let timer: ReturnType<typeof setInterval>;
@@ -96,15 +61,16 @@ const useTimer = ({ initialMinutes, onTimerEnd, isIncremental = false }: UseTime
     setIsPaused(true);
     setIsRunning(false);
     const now = Date.now();
-    const elapsedSeconds = Math.floor((now - (startTimestamp.current ?? now)) / 1000);
-    setTimeLeft((prevTimeLeft) => (isIncremental ? elapsedSeconds : prevTimeLeft));
-    startTimestamp.current = null; // Pausa sem perder o tempo restante
+    if (startTimestamp.current !== null) {
+      const elapsedSeconds = Math.floor((now - startTimestamp.current) / 1000);
+      setTimeLeft((prevTimeLeft) => (isIncremental ? elapsedSeconds : prevTimeLeft));
+    }
   }, [isIncremental]);
 
   const resetTimer = useCallback(() => {
     setIsRunning(false);
     setIsPaused(false);
-    setTimeLeft(0);
+    setTimeLeft(initialMinutes * 60);
     startTimestamp.current = null;
   }, [initialMinutes]);
 
