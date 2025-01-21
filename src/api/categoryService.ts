@@ -15,9 +15,9 @@ export const addCategory = async (name: string): Promise<CategoryResponse> => {
   }
 };
 
-export const fetchCategoryDuration = async (categoryId: string) => {
+export const fetchCategoryDuration = async (categoryId: string): Promise<number> => {
   const response = await axiosInstance.get(`/categories/${categoryId}/total-duration`);
-  return response.data.totalDuration;
+  return response.data;
 };
 
 export const updateCategory = async (categoryId: string, categoryName: string) => {
