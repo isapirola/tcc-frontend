@@ -89,5 +89,5 @@ textarea::placeholder {
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: var(--a6);
+  background: var(--a5);
 }
