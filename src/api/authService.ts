@@ -1,15 +1,20 @@
+import { AuthResponse } from "../interfaces";
 import axiosInstance from "./axiosInstance";
 
-export const login = async (email: string, password: string) => {
+export const login = async (email: string, password: string): Promise<AuthResponse> => {
   const response = await axiosInstance.post("/user/login", { email, password });
   // Armazenar o access token e o refresh token
-  localStorage.setItem("authToken", response.data.token.accessToken);
-  localStorage.setItem("refreshToken", response.data.token.refreshToken);
+  localStorage.setItem("authToken", response.data.accessToken);
+  localStorage.setItem("refreshToken", response.data.refreshToken);
 
   return response.data;
 };
 
-export const register = async (name: string, email: string, password: string) => {
+export const register = async (
+  name: string,
+  email: string,
+  password: string
+): Promise<AuthResponse> => {
   const response = await axiosInstance.post("/user/register", { name, email, password });
   // Armazenar o access token e o refresh token
   localStorage.setItem("authToken", response.data.accessToken);

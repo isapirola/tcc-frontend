@@ -1,0 +1,13 @@
+export interface AuthResponse {
+  message: string;
+  accessToken: string;
+  refreshToken: string;
+  user: UserData;
+}
+
+export interface UserData {
+  email: string;
+  name: string;
+  password: string;
+  _id: string;
+}

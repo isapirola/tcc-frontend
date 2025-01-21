@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./Login.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, LoginInput } from "../../components";
 import { login } from "../../api";
+import { UserContext } from "../../context/UserContext";
 
 const Login: React.FC = () => {
+  const { setUser } = useContext(UserContext)!;
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -14,7 +17,13 @@ const Login: React.FC = () => {
   const handleLogin = async () => {
     setError("");
     try {
-      await login(email, password);
+      const response = await login(email, password);
+      const userData = {
+        id: response.user._id,
+        name: response.user.name,
+        email: response.user.email,
+      };
+      setUser(userData);
       navigate("/");
     } catch (err: any) {
       console.error("Erro durante o login:", err);

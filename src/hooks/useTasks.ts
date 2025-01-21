@@ -165,12 +165,10 @@ const useTasks = () => {
 
   const handleUpdateCategory = useCallback(
     async (categoryId: string, categoryName: string) => {
-      console.log("chegou no hook" + categoryId + categoryName);
       try {
         setLoading(true);
         // Atualiza a tarefa na API
         const updatedCategory = await updateCategory(categoryId, categoryName);
-        console.log(updatedCategory);
 
         // Atualiza a tarefa no estado local
         setCategories((prevCategories) =>

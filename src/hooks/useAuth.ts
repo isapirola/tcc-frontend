@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
 const useAuth = () => {
+  const { setUser } = useContext(UserContext)!;
   const [isLogged, setIsLogged] = useState<boolean>(false);
   const token = localStorage.getItem("authToken");
 
@@ -15,6 +17,7 @@ const useAuth = () => {
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("refreshToken");
+    setUser(null);
     setIsLogged(false);
   };
 

@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, LoginInput } from "../../components";
 import { register } from "../../api";
 import styles from "../Login/Login.module.css";
+import { UserContext } from "../../context/UserContext";
 
 const Login: React.FC = () => {
+  const { setUser } = useContext(UserContext)!;
+
   const [error, setError] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -22,7 +25,13 @@ const Login: React.FC = () => {
     }
 
     try {
-      await register(name, email, password);
+      const response = await register(name, email, password);
+      const userData = {
+        id: response.user._id,
+        name: response.user.name,
+        email: response.user.email,
+      };
+      setUser(userData);
       navigate("/");
     } catch (err: any) {
       console.error("Erro durante o registro:", err);
