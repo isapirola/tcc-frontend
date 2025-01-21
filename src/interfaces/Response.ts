@@ -12,8 +12,13 @@ export interface UserData {
   _id: string;
 }
 
-export interface CategoriesResponse {
+export interface CategoryData {
   name: string;
   userId: string;
   _id: string;
+}
+
+export interface CategoryResponse {
+  category: CategoryData;
+  message: string;
 }

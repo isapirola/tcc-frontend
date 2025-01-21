@@ -1,15 +1,15 @@
-import { CategoriesResponse } from "../interfaces";
+import { CategoryData, CategoryResponse } from "../interfaces";
 import axiosInstance from "./axiosInstance";
 
-export const fetchCategories = async (): Promise<CategoriesResponse[]> => {
+export const fetchCategories = async (): Promise<CategoryData[]> => {
   const response = await axiosInstance.get("/categories");
   return response.data.categories;
 };
 
-export const addCategory = async (name: string) => {
+export const addCategory = async (name: string): Promise<CategoryResponse> => {
   try {
     const response = await axiosInstance.post("/categories", { name });
-    return response.data.category; // Retorna a nova categoria
+    return response.data;
   } catch (err: any) {
     throw err.response?.data || { message: "Erro ao criar categoria" }; // Mensagem de erro personalizada
   }

@@ -14,7 +14,7 @@ const useTasks = () => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [filters, setFilters] = useState<Filters>({
-    showCompleted: false,
+    showCompleted: true,
     showPending: true,
     showHighPriority: true,
     showMediumPriority: true,
@@ -73,7 +73,8 @@ const useTasks = () => {
     async (name: string) => {
       if (isLogged) {
         try {
-          const newCategory = await addCategory(name);
+          const response = await addCategory(name);
+          const newCategory = response.category;
           const totalDuration = await fetchCategoryDuration(newCategory._id);
 
           setCategories((prevCategories) => [
