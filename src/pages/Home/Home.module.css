@@ -152,20 +152,6 @@
 .taskInfo::-webkit-scrollbar {
   width: 8px;
 }
-.taskNotesText::-webkit-scrollbar-track,
-.taskInfo::-webkit-scrollbar-track {
-  background: var(--a1);
-  border-radius: 8px;
-}
-.taskNotesText::-webkit-scrollbar-thumb,
-.taskInfo::-webkit-scrollbar-thumb {
-  background: var(--a4);
-  border-radius: 8px;
-}
-.taskNotesText::-webkit-scrollbar-thumb:hover,
-.taskInfo::-webkit-scrollbar-thumb:hover {
-  background: var(--a6);
-}
 
 .noTaskSelected {
   font-size: 20px;
