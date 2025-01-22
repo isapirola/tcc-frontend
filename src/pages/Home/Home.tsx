@@ -13,7 +13,7 @@ import {
 import { useAuth, useTasks } from "../../hooks";
 import { Link } from "react-router-dom";
 import { Filters, Task } from "../../interfaces";
-import { editUserData } from "../../api/authService";
+import { deleteUser, editUserData } from "../../api/authService";
 
 const Home: React.FC = () => {
   const { isLogged, handleLogout, handleUserDataContext } = useAuth();
@@ -88,6 +88,12 @@ const Home: React.FC = () => {
   const handleEditUser = async (name?: string, email?: string, password?: string) => {
     const response = await editUserData(name, email, password);
     handleUserDataContext(response);
+  };
+
+  const handleDeleteUser = async () => {
+    console.log("handle delete na home");
+    await deleteUser();
+    handleLogout();
   };
 
   const handleTimerStop = (seconds: number) => {
@@ -234,6 +240,7 @@ const Home: React.FC = () => {
         isOpen={isProfileModalOpen}
         onClose={closeProfileModal}
         handleEditUser={handleEditUser}
+        handleDeleteUser={handleDeleteUser}
       />
     </div>
   );

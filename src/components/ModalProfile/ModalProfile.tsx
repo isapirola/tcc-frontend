@@ -10,9 +10,15 @@ interface ModalProfileProps {
   isOpen: boolean;
   onClose: () => void;
   handleEditUser: (name: string, email: string, password?: string) => void;
+  handleDeleteUser: () => void;
 }
 
-const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose, handleEditUser }) => {
+const ModalProfile: React.FC<ModalProfileProps> = ({
+  isOpen,
+  onClose,
+  handleEditUser,
+  handleDeleteUser,
+}) => {
   const { user } = useContext(UserContext)!;
 
   const [name, setName] = useState<string>(user?.name ?? "");
@@ -42,6 +48,21 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose, handleEdit
     } catch (err) {
       console.error("Erro ao editar usuário:", err);
       alert("Erro ao editar usuário. Tente novamente.");
+    }
+  };
+
+  const handleDeleteUserData = async () => {
+    const confirmDelete = window.confirm(
+      "Você tem certeza que deseja excluir sua conta? Esta ação não pode ser desfeita!"
+    );
+    if (confirmDelete) {
+      try {
+        await handleDeleteUser();
+        onClose();
+      } catch (err) {
+        console.error("Erro ao deletar usuário:", err);
+        alert("Erro ao deletar usuário. Tente novamente.");
+      }
     }
   };
 
@@ -103,18 +124,23 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose, handleEdit
           <p className={styles.dataText}>Senha: *****</p>
         </div>
       )}
-      <div className={styles.buttonContainer}>
-        <Button
-          label={isEditing ? "Cancelar" : "Fechar"}
-          onClick={() => {
-            onClose();
-            setIsEditing(false);
-          }}
-        />
-        <Button
-          label={isEditing ? "Salvar Dados" : "Editar Dados"}
-          onClick={() => (isEditing ? handleEditUserData() : setIsEditing(true))}
-        />
+      <div className={styles.mainButtonContainer}>
+        <div className={styles.buttonsContainer}>
+          <Button
+            label={isEditing ? "Cancelar" : "Fechar"}
+            onClick={() => {
+              onClose();
+              setIsEditing(false);
+            }}
+          />
+          <Button
+            label={isEditing ? "Salvar Dados" : "Editar Dados"}
+            onClick={() => (isEditing ? handleEditUserData() : setIsEditing(true))}
+          />
+        </div>
+        <div onClick={handleDeleteUserData}>
+          <p className={styles.deleteAccountText}>Deletar minha conta</p>
+        </div>
       </div>
     </Modal>
   );

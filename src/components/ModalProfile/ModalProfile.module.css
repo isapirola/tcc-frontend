@@ -49,19 +49,37 @@
   font-weight: bold;
 }
 
-.buttonContainer {
-  display: flex;
+.mainButtonContainer {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.buttonsContainer {
+  width: 100%;
+  display: flex;
   justify-content: space-between;
   gap: 24px;
 }
+.deleteAccountText {
+  cursor: pointer;
+  color: var(--a3);
+  font-size: 16px;
+  text-decoration: underline;
+}
 
 @media (max-width: 480px) {
+  .content {
+    padding: 16px 24px;
+    max-width: 80%;
+  }
   .mainTitle {
     font-size: 20px;
   }
 
-  .buttonContainer {
+  .buttonsContainer {
     flex-direction: column;
     gap: 12px;
   }

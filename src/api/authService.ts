@@ -40,7 +40,15 @@ export const editUserData = async (
     const response = await axiosInstance.put("/user/data", { name, email, password });
     return response.data.user;
   } catch (error: any) {
-    throw new Error("Erro ao obter dados do usuário: " + error.message);
+    throw new Error("Erro ao editar dados do usuário: " + error.message);
+  }
+};
+
+export const deleteUser = async () => {
+  try {
+    await axiosInstance.delete("/user/data");
+  } catch (error: any) {
+    throw new Error("Erro ao deletar usuário: " + error.message);
   }
 };
 
