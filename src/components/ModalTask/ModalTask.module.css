@@ -108,7 +108,7 @@ span {
   }
 
   .buttonContainer {
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: 12px;
   }
 }
