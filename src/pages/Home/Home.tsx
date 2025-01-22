@@ -199,33 +199,35 @@ const Home: React.FC = () => {
             <Timer handleTimerStop={handleTimerStop} />
           </div>
 
-          <div className={`${styles.taskSelectedContainer} ${selectedTask && styles.grid}`}>
-            <div className={styles.taskSelectedHeader}>
-              <h3>Tarefa selecionada</h3>
+          {isLogged && (
+            <div className={`${styles.taskSelectedContainer} ${selectedTask && styles.grid}`}>
+              <div className={styles.taskSelectedHeader}>
+                <h3>Tarefa selecionada</h3>
+              </div>
+              {selectedTask && selectedTaskCategory ? (
+                <>
+                  <div className={styles.taskInfo}>
+                    <p>Nome: {selectedTask.title}</p>
+                    <p>Prioridade: {selectedTask.priority}</p>
+                    <p>Categoria: {selectedTaskCategory.name}</p>
+                  </div>
+                  <span className={styles.verticalSeparator} />
+                  <div className={styles.taskNotes}>
+                    <p>Anotações:</p>
+                    <p className={styles.taskNotesText}>
+                      {selectedTask.notes === "" ? "Sem anotações" : selectedTask.notes}
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <p className={styles.noTaskSelected}>
+                  Nenhuma tarefa selecionada.
+                  <br />
+                  Selecione uma na lista de tarefas para registrar o tempo.
+                </p>
+              )}
             </div>
-            {selectedTask && selectedTaskCategory ? (
-              <>
-                <div className={styles.taskInfo}>
-                  <p>Nome: {selectedTask.title}</p>
-                  <p>Prioridade: {selectedTask.priority}</p>
-                  <p>Categoria: {selectedTaskCategory.name}</p>
-                </div>
-                <span className={styles.verticalSeparator} />
-                <div className={styles.taskNotes}>
-                  <p>Anotações:</p>
-                  <p className={styles.taskNotesText}>
-                    {selectedTask.notes === "" ? "Sem anotações" : selectedTask.notes}
-                  </p>
-                </div>
-              </>
-            ) : (
-              <p className={styles.noTaskSelected}>
-                Nenhuma tarefa selecionada.
-                <br />
-                Selecione uma na lista de tarefas para registrar o tempo.
-              </p>
-            )}
-          </div>
+          )}
         </div>
       </div>
       <ModalTask
