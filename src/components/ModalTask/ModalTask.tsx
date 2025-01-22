@@ -94,80 +94,82 @@ const ModalNewTask: React.FC<ModalNewTaskProps> = ({
       overlayClassName="ReactModal__Overlay"
       closeTimeoutMS={300} // Para animação
     >
-      <h2 className={styles.mainTitle}>{taskToEdit ? "Editar Tarefa" : "Nova Tarefa"}</h2>
-      <div className={styles.inputsContainer}>
-        <div className={styles.inputContainer}>
-          <p className={styles.inputTitle}>
-            Título <span>*</span>
-          </p>
-          <input
-            className={styles.input}
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Digite o título da tarefa"
-          />
-        </div>
-        <div className={styles.inputContainer}>
-          <p className={styles.inputTitle}>
-            Prioridade <span>*</span>
-          </p>
-          <div className={styles.selectContainer}>
-            <select
+      <div className={styles.container}>
+        <h2 className={styles.mainTitle}>{taskToEdit ? "Editar Tarefa" : "Nova Tarefa"}</h2>
+        <div className={styles.inputsContainer}>
+          <div className={styles.inputContainer}>
+            <p className={styles.inputTitle}>
+              Título <span>*</span>
+            </p>
+            <input
               className={styles.input}
-              value={priority}
-              onChange={(e) => setPriority(e.target.value)}>
-              <option value="">Selecione a prioridade</option>
-              <option value="Alta">Alta</option>
-              <option value="Média">Média</option>
-              <option value="Baixa">Baixa</option>
-            </select>
-            <ArrowDownIcon className={styles.selectIcon} />
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Digite o título da tarefa"
+            />
+          </div>
+          <div className={styles.inputContainer}>
+            <p className={styles.inputTitle}>
+              Prioridade <span>*</span>
+            </p>
+            <div className={styles.selectContainer}>
+              <select
+                className={styles.input}
+                value={priority}
+                onChange={(e) => setPriority(e.target.value)}>
+                <option value="">Selecione a prioridade</option>
+                <option value="Alta">Alta</option>
+                <option value="Média">Média</option>
+                <option value="Baixa">Baixa</option>
+              </select>
+              <ArrowDownIcon className={styles.selectIcon} />
+            </div>
+          </div>
+          <div className={styles.inputContainer}>
+            <p className={styles.inputTitle}>
+              Categoria <span>*</span>
+            </p>
+            <div className={styles.selectContainer}>
+              <select
+                className={styles.input}
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}>
+                <option value="">Selecione uma categoria</option>
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+              <ArrowDownIcon className={styles.selectIcon} />
+            </div>
+          </div>
+          <div className={styles.inputContainer}>
+            <p className={styles.inputTitle}>Tempo percorrido (em minutos)</p>
+            <input
+              className={styles.input}
+              value={Math.floor(duration / 60)}
+              onChange={(e) => setDuration(Number(e.target.value) * 60)}
+              placeholder="Digite a duração percorrida da tarefa"
+            />
+          </div>
+          <div className={styles.inputContainer}>
+            <p className={styles.inputTitle}>Anotações</p>
+            <textarea
+              className={styles.input}
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              placeholder="Adicione anotações sobre a tarefa"
+            />
           </div>
         </div>
-        <div className={styles.inputContainer}>
-          <p className={styles.inputTitle}>
-            Categoria <span>*</span>
-          </p>
-          <div className={styles.selectContainer}>
-            <select
-              className={styles.input}
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}>
-              <option value="">Selecione uma categoria</option>
-              {categories.map((category) => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
-                </option>
-              ))}
-            </select>
-            <ArrowDownIcon className={styles.selectIcon} />
-          </div>
-        </div>
-        <div className={styles.inputContainer}>
-          <p className={styles.inputTitle}>Tempo percorrido (em minutos)</p>
-          <input
-            className={styles.input}
-            value={Math.floor(duration / 60)}
-            onChange={(e) => setDuration(Number(e.target.value) * 60)}
-            placeholder="Digite a duração percorrida da tarefa"
+        <div className={styles.buttonContainer}>
+          <Button label={"Cancelar"} onClick={onClose} />
+          <Button
+            label={taskToEdit ? "Salvar Alterações" : "Adicionar"}
+            onClick={handleConfirm}
           />
         </div>
-        <div className={styles.inputContainer}>
-          <p className={styles.inputTitle}>Anotações</p>
-          <textarea
-            className={styles.input}
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-            placeholder="Adicione anotações sobre a tarefa"
-          />
-        </div>
-      </div>
-      <div className={styles.buttonContainer}>
-        <Button label={"Cancelar"} onClick={onClose} />
-        <Button
-          label={taskToEdit ? "Salvar Alterações" : "Adicionar"}
-          onClick={handleConfirm}
-        />
       </div>
     </Modal>
   );
