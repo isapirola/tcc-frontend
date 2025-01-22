@@ -13,9 +13,10 @@ import {
 import { useAuth, useTasks } from "../../hooks";
 import { Link } from "react-router-dom";
 import { Filters, Task } from "../../interfaces";
+import { editUserData } from "../../api/authService";
 
 const Home: React.FC = () => {
-  const { isLogged, handleLogout } = useAuth();
+  const { isLogged, handleLogout, handleUserDataContext } = useAuth();
   const {
     tasks,
     handleUpdateTask,
@@ -82,6 +83,11 @@ const Home: React.FC = () => {
     };
     handleUpdateTask(id, updatedTask);
     setTaskToEdit(undefined);
+  };
+
+  const handleEditUser = async (name?: string, email?: string, password?: string) => {
+    const response = await editUserData(name, email, password);
+    handleUserDataContext(response);
   };
 
   const handleTimerStop = (seconds: number) => {
@@ -224,7 +230,11 @@ const Home: React.FC = () => {
         handleAddTask={handleAddTask}
         handleEditTask={handleEditTask}
       />
-      <ModalProfile isOpen={isProfileModalOpen} onClose={closeProfileModal} />
+      <ModalProfile
+        isOpen={isProfileModalOpen}
+        onClose={closeProfileModal}
+        handleEditUser={handleEditUser}
+      />
     </div>
   );
 };

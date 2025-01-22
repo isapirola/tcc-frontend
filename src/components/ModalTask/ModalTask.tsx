@@ -90,7 +90,7 @@ const ModalNewTask: React.FC<ModalNewTaskProps> = ({
     <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
-      className="ReactModal__Content"
+      className={`ReactModal__Content ${styles.content}`}
       overlayClassName="ReactModal__Overlay"
       closeTimeoutMS={300} // Para animação
     >

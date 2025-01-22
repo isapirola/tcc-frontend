@@ -31,6 +31,19 @@ export const getUserData = async (): Promise<UserData> => {
   }
 };
 
+export const editUserData = async (
+  name?: string,
+  email?: string,
+  password?: string
+): Promise<UserData> => {
+  try {
+    const response = await axiosInstance.put("/user/data", { name, email, password });
+    return response.data.user;
+  } catch (error: any) {
+    throw new Error("Erro ao obter dados do usuário: " + error.message);
+  }
+};
+
 export const refreshAccessToken = async (refreshToken: string) => {
   try {
     const response = await axiosInstance.post("/user/refresh", { refreshToken });

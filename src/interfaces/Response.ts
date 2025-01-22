@@ -8,7 +8,7 @@ export interface AuthResponse {
 export interface UserData {
   email: string;
   name: string;
-  password: string;
+  password?: string;
   _id: string;
 }
 
