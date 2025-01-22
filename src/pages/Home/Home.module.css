@@ -65,7 +65,7 @@
 .timersContainer {
   padding: 24px 0;
   display: flex;
-  flex-grow: 1;
+  flex: 1;
   flex-direction: column;
   gap: 56px;
   background-color: var(--a6);
@@ -73,6 +73,7 @@
   align-items: center;
   height: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .timer {
@@ -91,8 +92,6 @@
   background-color: var(--a5);
   border-radius: 16px;
   padding: 24px;
-  height: 180px;
-  width: 70%;
 }
 .taskSelectedContainer.grid {
   position: relative;
@@ -102,9 +101,8 @@
   display: grid;
   grid-template-columns: 2fr 0.1fr 4fr;
   grid-template-rows: auto;
-  height: 180px;
-  width: 70%;
   gap: 16px;
+  max-width: 70%;
 }
 
 .taskSelectedHeader {
@@ -143,9 +141,9 @@
 }
 
 .taskNotesText {
-  flex-grow: 1;
   overflow-y: auto;
   padding-right: 8px;
+  white-space: pre-wrap;
 }
 
 .taskNotesText::-webkit-scrollbar,
@@ -159,7 +157,7 @@
   color: var(--a1);
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1064px) {
   .mainContainer {
     overflow-y: visible;
   }
@@ -174,6 +172,8 @@
   .timersContainer {
     max-width: 100%;
     height: 100%;
+    flex: auto;
+    flex-grow: 1;
   }
 }
 
