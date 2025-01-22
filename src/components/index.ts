@@ -4,6 +4,7 @@ export { default as DropdownMenu } from "./DropdownMenu";
 export { default as Header } from "./Header";
 export { default as LoginInput } from "./LoginInput";
 export { default as ModalTask } from "./ModalTask";
+export { default as ModalProfile } from "./ModalProfile";
 export { default as TaskFilters } from "./TaskFilters";
 export { default as TaskList } from "./TaskList";
 export { default as Timer } from "./Timer";

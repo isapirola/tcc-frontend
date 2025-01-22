@@ -6,9 +6,10 @@ import { LoginIcon, LogoutIcon, ProfileIcon, SettingsIcon } from "../icons";
 interface HeaderProps {
   isLogged: boolean;
   handleLogout: () => void;
+  handleProfile: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ isLogged, handleLogout }) => {
+const Header: React.FC<HeaderProps> = ({ isLogged, handleLogout, handleProfile }) => {
   const navigate = useNavigate();
 
   return (
@@ -16,7 +17,7 @@ const Header: React.FC<HeaderProps> = ({ isLogged, handleLogout }) => {
       <h1 className={styles.headerLogo}>TCC da Belinha</h1>
       <div className={styles.headerIcons}>
         {isLogged && (
-          <Button onClick={() => console.log("oii")} styleType="header">
+          <Button onClick={handleProfile} styleType="header">
             <ProfileIcon className={styles.headerIcon} />
           </Button>
         )}

@@ -4,6 +4,7 @@ import {
   Button,
   CategoryInput,
   Header,
+  ModalProfile,
   ModalTask,
   TaskFilters,
   TaskList,
@@ -31,6 +32,7 @@ const Home: React.FC = () => {
 
   const [isAddCategory, setIsAddCategory] = useState(false);
   const [isTaskModalOpen, setTaskModalOpen] = useState(false);
+  const [isProfileModalOpen, setProfileModalOpen] = useState(false);
   const [isFiltering, setIsFiltering] = useState(false);
   const [selectedTaskId, setSelectedTaskId] = useState("");
   const [taskToEdit, setTaskToEdit] = useState<Task | undefined>();
@@ -42,6 +44,8 @@ const Home: React.FC = () => {
 
   const openTaskModal = () => setTaskModalOpen(true);
   const closeTaskModal = () => setTaskModalOpen(false);
+  const openProfileModal = () => setProfileModalOpen(true);
+  const closeProfileModal = () => setProfileModalOpen(false);
 
   const handleToggleTaskCompletion = (taskId: string, finished: boolean) => {
     const updatedTask = { finished: !finished };
@@ -113,6 +117,7 @@ const Home: React.FC = () => {
           handleLogout();
           window.location.reload();
         }}
+        handleProfile={openProfileModal}
       />
       <div className={styles.contentContainer}>
         <div className={styles.tasksContainer}>
@@ -219,6 +224,7 @@ const Home: React.FC = () => {
         handleAddTask={handleAddTask}
         handleEditTask={handleEditTask}
       />
+      <ModalProfile isOpen={isProfileModalOpen} onClose={closeProfileModal} />
     </div>
   );
 };
