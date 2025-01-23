@@ -6,6 +6,7 @@ interface LoginInputProps {
   type: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onEnter?: () => void;
   placeholder: string;
   required?: boolean;
   icon?: "user" | "email" | "password";
@@ -15,6 +16,7 @@ const LoginInput: React.FC<LoginInputProps> = ({
   type,
   value,
   onChange,
+  onEnter,
   placeholder,
   required = false,
   icon,
@@ -31,6 +33,13 @@ const LoginInput: React.FC<LoginInputProps> = ({
         return;
     }
   };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && onEnter) {
+      onEnter();
+    }
+  };
+
   return (
     <div className={styles.input}>
       {getIcon()}
@@ -38,6 +47,7 @@ const LoginInput: React.FC<LoginInputProps> = ({
         type={type}
         value={value}
         onChange={onChange}
+        onKeyDown={handleKeyDown}
         placeholder={placeholder}
         required={required}
       />

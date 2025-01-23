@@ -64,6 +64,7 @@ const Login: React.FC = () => {
           icon="email"
         />
         <LoginInput
+          onEnter={handleLogin}
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
