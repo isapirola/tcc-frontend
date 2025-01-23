@@ -156,18 +156,18 @@ const Timer: React.FC<TimerProps> = ({ handleTimerStop }) => {
             </div>
           </div>
           <div className={styles.timerButtonContainer}>
-            <div className={styles.timerButton} onClick={toggleTimer}>
+            <div title="Play/Pause" className={styles.timerButton} onClick={toggleTimer}>
               {isRunning && !isPaused ? (
                 <PauseIcon className={styles.timerIcon} />
               ) : (
                 <PlayIcon className={styles.timerIcon} />
               )}
             </div>
-            <div className={styles.timerButton} onClick={stopTimer}>
+            <div title="Parar" className={styles.timerButton} onClick={stopTimer}>
               <StopIcon className={styles.timerIcon} />
             </div>
             {isPomodoro && (
-              <div className={styles.timerButton} onClick={handleSkipPomodoro}>
+              <div title="Próximo" className={styles.timerButton} onClick={handleSkipPomodoro}>
                 <SkipIcon className={styles.timerIcon} />
               </div>
             )}

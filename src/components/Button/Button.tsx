@@ -3,6 +3,7 @@ import styles from "./Button.module.css";
 
 interface TaskButtonProps {
   label?: string;
+  title?: string;
   onClick: () => void;
   isDisabled?: boolean;
   isSelected?: boolean;
@@ -12,6 +13,7 @@ interface TaskButtonProps {
 
 const Button: React.FC<TaskButtonProps> = ({
   label,
+  title,
   onClick,
   isDisabled = false,
   isSelected = false,
@@ -45,6 +47,7 @@ const Button: React.FC<TaskButtonProps> = ({
 
   return (
     <button
+      title={title}
       type={styleType === "login" ? "submit" : "button"}
       onClick={handleClick}
       disabled={isDisabled}

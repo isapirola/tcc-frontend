@@ -43,11 +43,14 @@
 }
 
 .noCategoriesText {
-  padding: 0 48px;
+  cursor: pointer;
+  margin-top: 32px;
+  padding: 0 24px;
   text-align: center;
   font-weight: 600;
   color: var(--a1);
   font-size: 28px;
+  text-decoration: underline;
 }
 
 .tasksFooter {

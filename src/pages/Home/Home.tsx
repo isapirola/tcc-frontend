@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./Home.module.css";
 import {
   Button,
@@ -37,6 +37,8 @@ const Home: React.FC = () => {
   const [isFiltering, setIsFiltering] = useState(false);
   const [selectedTaskId, setSelectedTaskId] = useState("");
   const [taskToEdit, setTaskToEdit] = useState<Task | undefined>();
+
+  const categoryInputRef = useRef<HTMLInputElement>(null);
 
   const selectedTask = tasks.find((task) => task.id === selectedTaskId);
   const selectedTaskCategory = categories.find(
@@ -120,6 +122,12 @@ const Home: React.FC = () => {
     }));
   };
 
+  useEffect(() => {
+    if (isAddCategory && categoryInputRef.current) {
+      categoryInputRef.current.focus();
+    }
+  }, [isAddCategory]);
+
   return (
     <div className={styles.mainContainer}>
       <Header
@@ -135,6 +143,11 @@ const Home: React.FC = () => {
         <div className={styles.tasksContainer}>
           <div className={styles.tasksButtons}>
             <Button
+              title={
+                isLogged && categories.length === 0
+                  ? "Crie uma categoria primeiro"
+                  : "Criar nova tarefa"
+              }
               isDisabled={!isLogged || categories.length === 0}
               label={"+ Nova Tarefa"}
               onClick={() => {
@@ -143,6 +156,7 @@ const Home: React.FC = () => {
               }}
             />
             <Button
+              title="Criar nova categoria"
               isDisabled={!isLogged}
               label={isAddCategory ? "Cancelar" : "+ Nova Categoria"}
               onClick={handleClickCategory}
@@ -151,6 +165,7 @@ const Home: React.FC = () => {
 
           {isAddCategory && (
             <CategoryInput
+              inputRef={categoryInputRef}
               onAddCategory={(category: string) => {
                 handleAddCategory(category);
                 handleClickCategory();
@@ -171,7 +186,13 @@ const Home: React.FC = () => {
                 handleDeleteCategory={handleDeleteCategory}
               />
             ) : (
-              <h2 className={styles.noCategoriesText}>
+              <h2
+                className={styles.noCategoriesText}
+                onClick={() => {
+                  if (!isAddCategory) {
+                    handleClickCategory();
+                  }
+                }}>
                 Crie uma nova categoria antes de adicionar tarefas
               </h2>
             )
@@ -187,6 +208,7 @@ const Home: React.FC = () => {
             )}
             <span className={styles.horizontalSeparator} />
             <Button
+              title="Filtros"
               isDisabled={!isLogged || categories.length === 0}
               label={isFiltering ? "Fechar filtragem" : "Filtrar tarefas"}
               onClick={handleClickFilter}

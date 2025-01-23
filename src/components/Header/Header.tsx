@@ -17,19 +17,19 @@ const Header: React.FC<HeaderProps> = ({ isLogged, handleLogout, handleProfile }
       <h1 className={styles.headerLogo}>TCC da Belinha</h1>
       <div className={styles.headerIcons}>
         {isLogged && (
-          <Button onClick={handleProfile} styleType="header">
+          <Button title="Meu Perfil" onClick={handleProfile} styleType="header">
             <ProfileIcon className={styles.headerIcon} />
           </Button>
         )}
-        <Button onClick={() => console.log("oii")} styleType="header">
+        <Button title="Configurações" onClick={() => console.log("oii")} styleType="header">
           <SettingsIcon className={styles.headerIcon} />
         </Button>
         {isLogged ? (
-          <Button onClick={handleLogout} styleType="header">
+          <Button title="Logout" onClick={handleLogout} styleType="header">
             <LogoutIcon className={styles.headerIcon} />
           </Button>
         ) : (
-          <Button onClick={() => navigate("/login")} styleType="header">
+          <Button title="Login" onClick={() => navigate("/login")} styleType="header">
             <LoginIcon className={styles.headerIcon} />
           </Button>
         )}
