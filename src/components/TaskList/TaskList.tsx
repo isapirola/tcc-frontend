@@ -130,7 +130,12 @@ const TaskList: React.FC<TaskListProps> = ({
                     <div
                       className={styles.taskName}
                       onClick={() => handleSelectedTask(task.id)}>
-                      <h3 className={styles.taskNameText}>{task.title} </h3>
+                      <h3
+                        className={`${styles.taskNameText} ${
+                          task.finished && styles.taskNameTextCompleted
+                        }`}>
+                        {task.title}{" "}
+                      </h3>
                     </div>
                   </div>
                   <div className={styles.taskItemRight}>

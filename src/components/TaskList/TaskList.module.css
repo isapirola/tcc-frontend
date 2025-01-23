@@ -167,6 +167,10 @@
   font-size: 20px;
 }
 
+.taskNameTextCompleted {
+  text-decoration: line-through;
+}
+
 .categoryEmpty {
   padding: 4px 0;
   padding-left: 36px;
