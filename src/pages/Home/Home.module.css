@@ -19,7 +19,6 @@
   flex-direction: column;
   max-width: 480px;
   background-color: var(--a5);
-  gap: 32px;
   position: relative;
 }
 
@@ -28,6 +27,7 @@
   flex-direction: row;
   gap: 16px;
   justify-content: space-between;
+  margin-bottom: 24px;
 }
 
 .notLoggedText {
