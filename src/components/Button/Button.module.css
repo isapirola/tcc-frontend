@@ -20,13 +20,13 @@
   transform: none;
 }
 
-.task {
-  width: 100%;
-}
-.task.disabled {
+.disabled {
   background-color: var(--a6);
   color: var(--a3);
   cursor: default;
+}
+.disabled:hover {
+  background-color: var(--a6);
 }
 
 .timers {
