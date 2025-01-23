@@ -8,8 +8,10 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("authToken"); // Busca o token mais recente
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    if (config.url && !["/user/login", "/user/register"].includes(config.url)) {
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
     }
     return config;
   },
@@ -26,6 +28,13 @@ axiosInstance.interceptors.response.use(
 
     // Caso o erro seja 401
     if (error.response?.status === 401 && !originalRequest._retry) {
+      // Ignora a lógica de refresh para rotas específicas, como login
+      if (
+        originalRequest.url.includes("/user/login") ||
+        originalRequest.url.includes("/user/register")
+      ) {
+        return Promise.reject(error);
+      }
       originalRequest._retry = true;
 
       if (isRefreshing) {

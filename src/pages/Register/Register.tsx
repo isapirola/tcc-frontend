@@ -44,7 +44,6 @@ const Login: React.FC = () => {
       setUser(userData);
       navigate("/");
     } catch (err: any) {
-      console.error("Erro durante o registro:", err);
       setError(err.message || "Erro ao registrar. Tente novamente.");
     } finally {
       setLoading(false);

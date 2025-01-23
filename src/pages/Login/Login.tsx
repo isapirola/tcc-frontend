@@ -38,7 +38,6 @@ const Login: React.FC = () => {
       setUser(userData);
       navigate("/");
     } catch (err: any) {
-      console.error("Erro durante o login:", err);
       setError(err.message || "Erro ao fazer login. Tente novamente.");
     } finally {
       setLoading(false);

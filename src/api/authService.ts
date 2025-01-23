@@ -2,12 +2,17 @@ import { AuthResponse, UserData } from "../interfaces";
 import axiosInstance from "./axiosInstance";
 
 export const login = async (email: string, password: string): Promise<AuthResponse> => {
-  const response = await axiosInstance.post("/user/login", { email, password });
+  try {
+    const response = await axiosInstance.post("/user/login", { email, password });
 
-  localStorage.setItem("authToken", response.data.accessToken);
-  localStorage.setItem("refreshToken", response.data.refreshToken);
+    localStorage.setItem("authToken", response.data.accessToken);
+    localStorage.setItem("refreshToken", response.data.refreshToken);
 
-  return response.data;
+    return response.data;
+  } catch (error: any) {
+    console.error("Erro ao fazer login:", error.response?.data || error.message);
+    throw new Error(error.response?.data.message || "Erro ao fazer login.");
+  }
 };
 
 export const register = async (
@@ -15,11 +20,16 @@ export const register = async (
   email: string,
   password: string
 ): Promise<AuthResponse> => {
-  const response = await axiosInstance.post("/user/register", { name, email, password });
+  try {
+    const response = await axiosInstance.post("/user/register", { name, email, password });
 
-  localStorage.setItem("authToken", response.data.accessToken);
-  localStorage.setItem("refreshToken", response.data.refreshToken);
-  return response.data;
+    localStorage.setItem("authToken", response.data.accessToken);
+    localStorage.setItem("refreshToken", response.data.refreshToken);
+    return response.data;
+  } catch (error: any) {
+    console.error("Erro ao criar conta:", error.response?.data || error.message);
+    throw new Error(error.response?.data.message || "Erro ao criar conta.");
+  }
 };
 
 export const getUserData = async (): Promise<UserData> => {
