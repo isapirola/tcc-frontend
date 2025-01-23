@@ -57,7 +57,11 @@ const Login: React.FC = () => {
       </Link>
       <div className={styles.contentContainer}>
         <h1 className={styles.title}>Criar conta</h1>
-        {error && <p className={styles.errorMessage}>{error}</p>}
+        {error && (
+          <div className={styles.errorContainer}>
+            <p className={styles.errorMessage}>{error}</p>
+          </div>
+        )}
         <LoginInput
           type="text"
           value={name}

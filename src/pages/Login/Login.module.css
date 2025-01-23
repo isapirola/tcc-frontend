@@ -33,8 +33,16 @@
   font-size: 32px;
 }
 
+.errorContainer {
+  display: flex;
+  padding: 8px 16px;
+  border-radius: 16px;
+  border: 1px solid var(--v1);
+  background-color: rgba(94, 19, 23, 0.7);
+}
 .errorMessage {
-  color: var(--w);
+  color: var(--v1);
+  font-weight: 600;
   font-size: 18px;
 }
 
