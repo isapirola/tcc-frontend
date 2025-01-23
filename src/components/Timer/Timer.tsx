@@ -80,6 +80,8 @@ const Timer: React.FC<TimerProps> = ({ handleTimerStop }) => {
     const customTimerTotal = Number(customTimerHours) * 60 + Number(customTimerMinutes);
     setInitialTime(initialTime + customTimerTotal);
     setTimer(minutes + customTimerTotal);
+    setCustomTimerHours("0");
+    setCustomTimerMinutes("0");
   };
 
   const handleChangeHours = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -117,8 +119,12 @@ const Timer: React.FC<TimerProps> = ({ handleTimerStop }) => {
       handleTimerStop(minutes * 60 + seconds);
     } else {
       handleTimerStop(initialTime * 60 - (minutes * 60 + seconds));
-      setInitialTime(0);
     }
+    resetTimer();
+  };
+
+  const redefineTimer = () => {
+    setInitialTime(0);
     resetTimer();
   };
 
@@ -215,6 +221,12 @@ const Timer: React.FC<TimerProps> = ({ handleTimerStop }) => {
             <Button
               label="Adicionar Tempo"
               onClick={handleSetCustomTimer}
+              isDisabled={isRunning}
+              styleType="timer"
+            />
+            <Button
+              label="Redefinir Timer"
+              onClick={redefineTimer}
               isDisabled={isRunning}
               styleType="timer"
             />
