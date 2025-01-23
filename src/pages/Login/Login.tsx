@@ -15,8 +15,18 @@ const Login: React.FC = () => {
 
   const navigate = useNavigate();
 
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handleLogin = async () => {
     setError("");
+    if (!validateEmail(email)) {
+      setError("Por favor, insira um e-mail válido.");
+      return;
+    }
+
     setLoading(true);
     try {
       const response = await login(email, password);

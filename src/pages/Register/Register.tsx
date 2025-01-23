@@ -17,15 +17,23 @@ const Login: React.FC = () => {
 
   const navigate = useNavigate();
 
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handleRegister = async () => {
     setError("");
-    setLoading(true);
-
+    if (!validateEmail(email)) {
+      setError("Por favor, insira um e-mail válido.");
+      return;
+    }
     if (password !== confirmPassword) {
       setError("As senhas não coincidem. Tente novamente.");
       return; // Interrompe a execução se as senhas não forem iguais
     }
 
+    setLoading(true);
     try {
       const response = await register(name, email, password);
       const userData = {
