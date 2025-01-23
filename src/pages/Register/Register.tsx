@@ -84,6 +84,7 @@ const Login: React.FC = () => {
           icon="password"
         />
         <LoginInput
+          onEnter={handleRegister}
           type="password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
