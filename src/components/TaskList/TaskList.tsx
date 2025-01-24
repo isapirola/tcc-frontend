@@ -59,7 +59,7 @@ const TaskList: React.FC<TaskListProps> = ({
     }
   }, [categoryToRename]);
 
-  if (!loading) {
+  if (loading) {
     return (
       <div className={styles.loadingContainer}>
         <LoadingIcon className={styles.loadingSpinner} color="var(--w)" />
