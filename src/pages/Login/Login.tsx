@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import styles from "./Login.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, LoginInput } from "../../components";
+import { Button, LoadingSpinner, LoginInput } from "../../components";
 import { login } from "../../api";
 import { UserContext } from "../../context/UserContext";
 
@@ -72,11 +72,9 @@ const Login: React.FC = () => {
           icon="password"
         />
         <div className={styles.buttonContainer}>
-          <Button
-            label={loading ? "Carregando..." : "Login"}
-            onClick={handleLogin}
-            styleType="login"
-          />
+          <Button onClick={handleLogin} styleType="login">
+            {loading ? <LoadingSpinner size={18} /> : <p>Login</p>}
+          </Button>
           <p className={styles.bottomText}>
             Não possui uma conta? <Link to={"/register"}>Registre-se</Link>
           </p>
