@@ -4,6 +4,7 @@ import Button from "../Button";
 import { useEffect, useState } from "react";
 import { ArrowDownIcon } from "../icons";
 import { Task } from "../../interfaces";
+import LoadingSpinner from "../LoadingSpinner";
 
 Modal.setAppElement("#root");
 
@@ -42,6 +43,7 @@ const ModalNewTask: React.FC<ModalNewTaskProps> = ({
   const [category, setCategory] = useState<string>("");
   const [notes, setNotes] = useState<string>("");
   const [duration, setDuration] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (taskToEdit) {
@@ -65,7 +67,7 @@ const ModalNewTask: React.FC<ModalNewTaskProps> = ({
       alert("Preencha todos os campos obrigatórios.");
       return;
     }
-
+    setIsLoading(true);
     try {
       if (taskToEdit) {
         // Se estiver editando, chama handleEditTask
@@ -83,6 +85,8 @@ const ModalNewTask: React.FC<ModalNewTaskProps> = ({
     } catch (err) {
       console.error("Erro ao salvar tarefa:", err);
       alert("Erro ao salvar tarefa. Tente novamente.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -165,10 +169,13 @@ const ModalNewTask: React.FC<ModalNewTaskProps> = ({
         </div>
         <div className={styles.buttonContainer}>
           <Button label={"Cancelar"} onClick={onClose} />
-          <Button
-            label={taskToEdit ? "Salvar Alterações" : "Adicionar"}
-            onClick={handleConfirm}
-          />
+          <Button onClick={handleConfirm}>
+            {isLoading ? (
+              <LoadingSpinner size={18} />
+            ) : (
+              <p>{taskToEdit ? "Salvar Alterações" : "Adicionar"}</p>
+            )}
+          </Button>
         </div>
       </div>
     </Modal>

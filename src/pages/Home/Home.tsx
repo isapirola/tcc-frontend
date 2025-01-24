@@ -4,6 +4,7 @@ import {
   Button,
   CategoryInput,
   Header,
+  LoadingSpinner,
   ModalProfile,
   ModalTask,
   TaskFilters,
@@ -14,7 +15,6 @@ import { useAuth, useTasks } from "../../hooks";
 import { Link } from "react-router-dom";
 import { Filters, Task } from "../../interfaces";
 import { deleteUser, editUserData } from "../../api/authService";
-import { LoadingIcon } from "../../components/icons";
 
 const Home: React.FC = () => {
   const { isLogged, handleLogout, handleUserDataContext } = useAuth();
@@ -177,7 +177,7 @@ const Home: React.FC = () => {
           {isLogged ? (
             loadingTaskList ? (
               <div className={styles.loadingContainer}>
-                <LoadingIcon className={styles.loadingSpinner} color="var(--w)" />
+                <LoadingSpinner size={50} />
               </div>
             ) : categories.length > 0 ? (
               <TaskList

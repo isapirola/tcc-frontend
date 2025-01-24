@@ -36,25 +36,6 @@
   justify-content: center;
   align-items: center;
 }
-.loadingSpinner {
-  rotate: -90deg;
-  width: 50px;
-  height: 50px;
-  animation: spin 1s linear infinite;
-}
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(180deg);
-    animation-timing-function: ease-out; /* Desacelera */
-  }
-  100% {
-    transform: rotate(360deg);
-    animation-timing-function: ease-in; /* Acelera */
-  }
-}
 
 .notLoggedText {
   padding: 0 48px;
