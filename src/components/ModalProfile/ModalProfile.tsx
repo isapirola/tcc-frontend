@@ -3,6 +3,7 @@ import styles from "./ModalProfile.module.css";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 import Button from "../Button";
+import LoadingSpinner from "../LoadingSpinner";
 
 Modal.setAppElement("#root");
 
@@ -26,6 +27,7 @@ const ModalProfile: React.FC<ModalProfileProps> = ({
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [isEditing, setIsEditing] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (isEditing && user) {
@@ -40,14 +42,16 @@ const ModalProfile: React.FC<ModalProfileProps> = ({
       return;
     }
 
+    setIsLoading(true);
+
     try {
       await handleEditUser(name, email, password);
-
-      onClose();
-      setIsEditing(false);
     } catch (err) {
       console.error("Erro ao editar usuário:", err);
       alert("Erro ao editar usuário. Tente novamente.");
+    } finally {
+      setIsLoading(false);
+      setIsEditing(false);
     }
   };
 
@@ -133,10 +137,13 @@ const ModalProfile: React.FC<ModalProfileProps> = ({
               setIsEditing(false);
             }}
           />
-          <Button
-            label={isEditing ? "Salvar Dados" : "Editar Dados"}
-            onClick={() => (isEditing ? handleEditUserData() : setIsEditing(true))}
-          />
+          <Button onClick={() => (isEditing ? handleEditUserData() : setIsEditing(true))}>
+            {isLoading ? (
+              <LoadingSpinner size={18} />
+            ) : (
+              <p>{isEditing ? "Salvar Dados" : "Editar Dados"}</p>
+            )}
+          </Button>
         </div>
         <div onClick={handleDeleteUserData}>
           <p className={styles.deleteAccountText}>Deletar minha conta</p>
