@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import styles from "./Header.module.css";
-import { LoginIcon, LogoutIcon, ProfileIcon, SettingsIcon } from "../icons";
+import { LoginIcon, LogoutIcon, ProfileIcon } from "../icons";
 
 interface HeaderProps {
   isLogged: boolean;
