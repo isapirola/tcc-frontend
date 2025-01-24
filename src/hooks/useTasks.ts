@@ -144,23 +144,28 @@ const useTasks = () => {
     }
   }, []);
 
-  const handleDeleteTask = useCallback(async (taskId: string) => {
-    try {
-      setLoading(true);
-      setError(null);
+  const handleDeleteTask = useCallback(async (taskId: string, taskName: string) => {
+    const confirmDelete = window.confirm(
+      `Você tem certeza que deseja excluir a tarefa "${taskName}"?`
+    );
+    if (confirmDelete) {
+      try {
+        setLoading(true);
+        setError(null);
 
-      setTasks((prevTasks) => {
-        const taskToDelete = prevTasks.find((task) => task.id === taskId);
-        if (taskToDelete) {
-          updateCategoryDuration(taskToDelete.category);
-        }
-        return prevTasks.filter((task) => task.id !== taskId);
-      });
-      await deleteTask(taskId);
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Erro ao deletar tarefa.");
-    } finally {
-      setLoading(false);
+        setTasks((prevTasks) => {
+          const taskToDelete = prevTasks.find((task) => task.id === taskId);
+          if (taskToDelete) {
+            updateCategoryDuration(taskToDelete.category);
+          }
+          return prevTasks.filter((task) => task.id !== taskId);
+        });
+        await deleteTask(taskId);
+      } catch (err: any) {
+        setError(err.response?.data?.message || "Erro ao deletar tarefa.");
+      } finally {
+        setLoading(false);
+      }
     }
   }, []);
 
@@ -190,21 +195,29 @@ const useTasks = () => {
     []
   );
 
-  const handleDeleteCategory = useCallback(async (categoryId: string) => {
-    try {
-      setLoading(true);
-      setError(null);
+  const handleDeleteCategory = useCallback(
+    async (categoryId: string, categoryName: string) => {
+      const confirmDelete = window.confirm(
+        `Você tem certeza que deseja excluir a categoria "${categoryName}"? Todas as tarefas dentro dela também serão excluídas!`
+      );
+      if (confirmDelete) {
+        try {
+          setLoading(true);
+          setError(null);
 
-      setCategories((prevCategories) => {
-        return prevCategories.filter((category) => category.id !== categoryId);
-      });
-      await deleteCategory(categoryId);
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Erro ao deletar tarefa.");
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+          setCategories((prevCategories) => {
+            return prevCategories.filter((category) => category.id !== categoryId);
+          });
+          await deleteCategory(categoryId);
+        } catch (err: any) {
+          setError(err.response?.data?.message || "Erro ao deletar tarefa.");
+        } finally {
+          setLoading(false);
+        }
+      }
+    },
+    []
+  );
 
   const updateCategoryDuration = useCallback(async (categoryId: string) => {
     try {

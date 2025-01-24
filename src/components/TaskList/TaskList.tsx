@@ -11,9 +11,9 @@ interface TaskListProps {
   selectedTaskId: string;
   handleSelectedTask: (taskId: string) => void;
   handleEditTask: (task: Task) => void;
-  handleDeleteTask: (taskId: string) => void;
+  handleDeleteTask: (taskId: string, taskName: string) => void;
   handleEditCategory: (categoryId: string, categoryName: string) => void;
-  handleDeleteCategory: (categoryId: string) => void;
+  handleDeleteCategory: (categoryId: string, categoryName: string) => void;
   onToggleTaskCompletion: (taskId: string, finished: boolean) => void;
 }
 
@@ -106,7 +106,7 @@ const TaskList: React.FC<TaskListProps> = ({
                 <DropdownMenu
                   category
                   onSelectEdit={() => handleClickEditCategory(category.id, category.name)}
-                  onSelectDelete={() => handleDeleteCategory(category.id)}
+                  onSelectDelete={() => handleDeleteCategory(category.id, category.name)}
                 />
               </div>
             </div>
@@ -142,7 +142,7 @@ const TaskList: React.FC<TaskListProps> = ({
                     <p className={styles.taskDuration}>{formatDuration(task.duration)}</p>
                     <DropdownMenu
                       onSelectEdit={() => handleEditTask(task)}
-                      onSelectDelete={() => handleDeleteTask(task.id)}
+                      onSelectDelete={() => handleDeleteTask(task.id, task.title)}
                     />
                   </div>
                 </div>
