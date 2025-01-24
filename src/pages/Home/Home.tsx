@@ -222,32 +222,45 @@ const Home: React.FC = () => {
           </div>
 
           {isLogged && (
-            <div className={`${styles.taskSelectedContainer} ${selectedTask && styles.grid}`}>
+            <div className={styles.taskSelectedContainer}>
               <div className={styles.taskSelectedHeader}>
-                <h3>Tarefa selecionada</h3>
+                <h3>Tarefa selecionada {selectedTask?.finished && "(Concluída)"}</h3>
+                {selectedTask && (
+                  <div
+                    onClick={() => {
+                      handleToggleTaskCompletion(selectedTask.id, selectedTask.finished);
+                    }}
+                    className={styles.taskSelectedFinishButton}>
+                    <h4 className={styles.taskSelectedFinishText}>
+                      {selectedTask.finished ? "Reabrir tarefa" : "Concluir Tarefa"}
+                    </h4>
+                  </div>
+                )}
               </div>
-              {selectedTask && selectedTaskCategory ? (
-                <>
-                  <div className={styles.taskInfo}>
-                    <p>Nome: {selectedTask.title}</p>
-                    <p>Prioridade: {selectedTask.priority}</p>
-                    <p>Categoria: {selectedTaskCategory.name}</p>
-                  </div>
-                  <span className={styles.verticalSeparator} />
-                  <div className={styles.taskNotes}>
-                    <p>Anotações:</p>
-                    <p className={styles.taskNotesText}>
-                      {selectedTask.notes === "" ? "Sem anotações" : selectedTask.notes}
-                    </p>
-                  </div>
-                </>
-              ) : (
-                <p className={styles.noTaskSelected}>
-                  Nenhuma tarefa selecionada.
-                  <br />
-                  Selecione uma na lista de tarefas para registrar o tempo.
-                </p>
-              )}
+              <div className={`${styles.taskSelectedContent} ${selectedTask && styles.grid}`}>
+                {selectedTask && selectedTaskCategory ? (
+                  <>
+                    <div className={styles.taskInfo}>
+                      <p>Nome: {selectedTask.title}</p>
+                      <p>Prioridade: {selectedTask.priority}</p>
+                      <p>Categoria: {selectedTaskCategory.name}</p>
+                    </div>
+                    <span className={styles.verticalSeparator} />
+                    <div className={styles.taskNotes}>
+                      <p>Anotações:</p>
+                      <p className={styles.taskNotesText}>
+                        {selectedTask.notes === "" ? "Sem anotações" : selectedTask.notes}
+                      </p>
+                    </div>
+                  </>
+                ) : (
+                  <p className={styles.noTaskSelected}>
+                    Nenhuma tarefa selecionada.
+                    <br />
+                    Selecione uma na lista de tarefas para registrar o tempo.
+                  </p>
+                )}
+              </div>
             </div>
           )}
         </div>

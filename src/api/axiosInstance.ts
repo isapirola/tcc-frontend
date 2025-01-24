@@ -7,7 +7,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("authToken"); // Busca o token mais recente
+    const token = localStorage.getItem("authToken");
     if (config.url && !["/user/login", "/user/register"].includes(config.url)) {
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
