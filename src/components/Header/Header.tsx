@@ -21,9 +21,9 @@ const Header: React.FC<HeaderProps> = ({ isLogged, handleLogout, handleProfile }
             <ProfileIcon className={styles.headerIcon} />
           </Button>
         )}
-        <Button title="Configurações" onClick={() => console.log("oii")} styleType="header">
+        {/* <Button title="Configurações" onClick={() => console.log("oii")} styleType="header">
           <SettingsIcon className={styles.headerIcon} />
-        </Button>
+        </Button> */}
         {isLogged ? (
           <Button title="Logout" onClick={handleLogout} styleType="header">
             <LogoutIcon className={styles.headerIcon} />

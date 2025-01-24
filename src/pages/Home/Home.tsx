@@ -18,15 +18,16 @@ import { deleteUser, editUserData } from "../../api/authService";
 const Home: React.FC = () => {
   const { isLogged, handleLogout, handleUserDataContext } = useAuth();
   const {
+    loadingTaskList,
     tasks,
-    handleUpdateTask,
+    categories,
+    groupedTasks,
     filters,
     setFilters,
-    groupedTasks,
-    categories,
-    handleAddCategory,
     handleAddTask,
+    handleUpdateTask,
     handleDeleteTask,
+    handleAddCategory,
     handleUpdateCategory,
     handleDeleteCategory,
   } = useTasks();
@@ -93,7 +94,6 @@ const Home: React.FC = () => {
   };
 
   const handleDeleteUser = async () => {
-    console.log("handle delete na home");
     await deleteUser();
     handleLogout();
   };
@@ -176,6 +176,7 @@ const Home: React.FC = () => {
           {isLogged ? (
             categories.length > 0 ? (
               <TaskList
+                loading={loadingTaskList}
                 groupedTasks={groupedTasks}
                 onToggleTaskCompletion={handleToggleTaskCompletion}
                 selectedTaskId={selectedTaskId}

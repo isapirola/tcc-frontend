@@ -16,3 +16,5 @@ export { default as SkipIcon } from "./SkipIcon";
 export { default as StopIcon } from "./StopIcon";
 export { default as EditIcon } from "./EditIcon";
 export { default as TrashIcon } from "./TrashIcon";
+export { default as InfoIcon } from "./InfoIcon";
+export { default as LoadingIcon } from "./LoadingIcon";

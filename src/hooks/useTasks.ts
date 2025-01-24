@@ -12,7 +12,7 @@ const useTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loadingTaskList, setLoadingTaskList] = useState<boolean>(false);
   const [filters, setFilters] = useState<Filters>({
     showCompleted: true,
     showPending: true,
@@ -64,14 +64,24 @@ const useTasks = () => {
           setError(err.message || "Erro ao carregar tarefas.");
         }
       };
-      loadCategories();
-      loadTasks();
+      const loadData = async () => {
+        setLoadingTaskList(true); // Inicia o carregamento
+        try {
+          await Promise.all([loadCategories(), loadTasks()]); // Aguarda todas as requisições
+        } finally {
+          setLoadingTaskList(false); // Finaliza o carregamento
+        }
+      };
+
+      loadData();
     }
   }, [isLogged]);
 
   const handleAddCategory = useCallback(
     async (name: string) => {
       if (isLogged) {
+        setLoadingTaskList(true);
+
         try {
           const response = await addCategory(name);
           const newCategory = response.category;
@@ -83,6 +93,8 @@ const useTasks = () => {
           ]);
         } catch (err: any) {
           setError(err.message || "Erro ao adicionar categoria.");
+        } finally {
+          setLoadingTaskList(false);
         }
       }
     },
@@ -98,6 +110,7 @@ const useTasks = () => {
       duration: number
     ) => {
       if (isLogged) {
+        setLoadingTaskList(true);
         try {
           const newTaskResponse = await addTask(title, category, priority, notes, duration);
           const newTask = newTaskResponse.task;
@@ -116,6 +129,8 @@ const useTasks = () => {
           await updateCategoryDuration(newTask.category);
         } catch (err: any) {
           setError(err.message || "Erro ao adicionar tarefa.");
+        } finally {
+          setLoadingTaskList(false);
         }
       }
     },
@@ -124,7 +139,7 @@ const useTasks = () => {
 
   const handleUpdateTask = useCallback(async (taskId: string, payload: TaskUpdatePayload) => {
     try {
-      setLoading(true);
+      setLoadingTaskList(true);
       // Atualiza a tarefa na API
       const updatedTask = await updateTask(taskId, payload);
 
@@ -140,7 +155,7 @@ const useTasks = () => {
       setError(err.response?.data?.message || "Erro ao atualizar tarefa");
       throw err; // Repropaga o erro
     } finally {
-      setLoading(false);
+      setLoadingTaskList(false);
     }
   }, []);
 
@@ -150,7 +165,7 @@ const useTasks = () => {
     );
     if (confirmDelete) {
       try {
-        setLoading(true);
+        setLoadingTaskList(true);
         setError(null);
 
         setTasks((prevTasks) => {
@@ -164,7 +179,7 @@ const useTasks = () => {
       } catch (err: any) {
         setError(err.response?.data?.message || "Erro ao deletar tarefa.");
       } finally {
-        setLoading(false);
+        setLoadingTaskList(false);
       }
     }
   }, []);
@@ -172,7 +187,7 @@ const useTasks = () => {
   const handleUpdateCategory = useCallback(
     async (categoryId: string, categoryName: string) => {
       try {
-        setLoading(true);
+        setLoadingTaskList(true);
         // Atualiza a tarefa na API
         const response = await updateCategory(categoryId, categoryName);
         const updatedCategory = response.category;
@@ -189,7 +204,7 @@ const useTasks = () => {
         setError(err.response?.data?.message || "Erro ao atualizar tarefa");
         throw err; // Repropaga o erro
       } finally {
-        setLoading(false);
+        setLoadingTaskList(false);
       }
     },
     []
@@ -202,7 +217,7 @@ const useTasks = () => {
       );
       if (confirmDelete) {
         try {
-          setLoading(true);
+          setLoadingTaskList(true);
           setError(null);
 
           setCategories((prevCategories) => {
@@ -212,7 +227,7 @@ const useTasks = () => {
         } catch (err: any) {
           setError(err.response?.data?.message || "Erro ao deletar tarefa.");
         } finally {
-          setLoading(false);
+          setLoadingTaskList(false);
         }
       }
     },
@@ -249,7 +264,7 @@ const useTasks = () => {
 
   return {
     error,
-    loading,
+    loadingTaskList,
     groupedTasks,
     tasks,
     categories,
