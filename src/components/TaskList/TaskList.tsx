@@ -1,13 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./TaskList.module.css";
-import { ArrowDownIcon, CheckIcon, LoadingIcon } from "../icons";
+import { ArrowDownIcon, CheckIcon } from "../icons";
 import { formatDuration } from "../../utils";
 import DropdownMenu from "../DropdownMenu";
 import Button from "../Button";
 import { GroupedTasks, Task } from "../../interfaces";
 
 interface TaskListProps {
-  loading: boolean;
   groupedTasks: GroupedTasks[];
   selectedTaskId: string;
   handleSelectedTask: (taskId: string) => void;
@@ -19,7 +18,6 @@ interface TaskListProps {
 }
 
 const TaskList: React.FC<TaskListProps> = ({
-  loading,
   groupedTasks,
   selectedTaskId,
   handleSelectedTask,
@@ -58,14 +56,6 @@ const TaskList: React.FC<TaskListProps> = ({
       categoryInputRef.current.focus();
     }
   }, [categoryToRename]);
-
-  if (loading) {
-    return (
-      <div className={styles.loadingContainer}>
-        <LoadingIcon className={styles.loadingSpinner} color="var(--w)" />
-      </div>
-    );
-  }
 
   return (
     <div className={styles.mainContainer}>

@@ -14,6 +14,7 @@ import { useAuth, useTasks } from "../../hooks";
 import { Link } from "react-router-dom";
 import { Filters, Task } from "../../interfaces";
 import { deleteUser, editUserData } from "../../api/authService";
+import { LoadingIcon } from "../../components/icons";
 
 const Home: React.FC = () => {
   const { isLogged, handleLogout, handleUserDataContext } = useAuth();
@@ -174,9 +175,12 @@ const Home: React.FC = () => {
           )}
 
           {isLogged ? (
-            categories.length > 0 ? (
+            loadingTaskList ? (
+              <div className={styles.loadingContainer}>
+                <LoadingIcon className={styles.loadingSpinner} color="var(--w)" />
+              </div>
+            ) : categories.length > 0 ? (
               <TaskList
-                loading={loadingTaskList}
                 groupedTasks={groupedTasks}
                 onToggleTaskCompletion={handleToggleTaskCompletion}
                 selectedTaskId={selectedTaskId}
