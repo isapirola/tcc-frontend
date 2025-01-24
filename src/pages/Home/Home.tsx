@@ -149,7 +149,7 @@ const Home: React.FC = () => {
                   ? "Crie uma categoria primeiro"
                   : "Criar nova tarefa"
               }
-              isDisabled={!isLogged || categories.length === 0}
+              isDisabled={!isLogged || categories.length === 0 || loadingTaskList}
               label={"+ Nova Tarefa"}
               onClick={() => {
                 setTaskToEdit(undefined);
@@ -158,7 +158,7 @@ const Home: React.FC = () => {
             />
             <Button
               title="Criar nova categoria"
-              isDisabled={!isLogged}
+              isDisabled={!isLogged || loadingTaskList}
               label={isAddCategory ? "Cancelar" : "+ Nova Categoria"}
               onClick={handleClickCategory}
             />
@@ -214,7 +214,7 @@ const Home: React.FC = () => {
             <span className={styles.horizontalSeparator} />
             <Button
               title="Filtros"
-              isDisabled={!isLogged || categories.length === 0}
+              isDisabled={!isLogged || categories.length === 0 || loadingTaskList}
               label={isFiltering ? "Fechar filtragem" : "Filtrar tarefas"}
               onClick={handleClickFilter}
             />
