@@ -11,17 +11,21 @@ const useTimer = ({ initialMinutes, onTimerEnd, isIncremental = false }: UseTime
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [isPaused, setIsPaused] = useState<boolean>(false);
 
-  const startTimestamp = useRef<number | null>(null); // Para armazenar o tempo inicial
+  const startTimestamp = useRef<number | null>(null);
+  const pausedTime = useRef<number>(initialMinutes * 60);
 
   useEffect(() => {
     setTimeLeft(initialMinutes * 60);
+    pausedTime.current = initialMinutes * 60;
+    setIsRunning(false);
+    setIsPaused(false);
+    startTimestamp.current = null;
   }, [initialMinutes]);
 
   useEffect(() => {
     let timer: ReturnType<typeof setInterval>;
 
     if (isRunning && !isPaused) {
-      // Define o timestamp inicial
       if (!startTimestamp.current) {
         startTimestamp.current = Date.now();
       }
@@ -30,15 +34,14 @@ const useTimer = ({ initialMinutes, onTimerEnd, isIncremental = false }: UseTime
         const now = Date.now();
         const elapsedSeconds = Math.floor((now - (startTimestamp.current ?? now)) / 1000);
 
-        // Atualiza o tempo restante
-        const currentTimeLeft = isIncremental
-          ? elapsedSeconds
-          : Math.max(0, initialMinutes * 60 - elapsedSeconds);
+        const updatedTime = isIncremental
+          ? pausedTime.current + elapsedSeconds
+          : Math.max(0, pausedTime.current - elapsedSeconds);
 
-        setTimeLeft(currentTimeLeft);
+        setTimeLeft(updatedTime);
 
-        // Encerra o timer em contagem regressiva
-        if (currentTimeLeft === 0 && !isIncremental) {
+        if (!isIncremental && updatedTime === 0) {
+          // Se for regressivo, encerra quando o tempo chegar a zero
           clearInterval(timer);
           setIsRunning(false);
           if (onTimerEnd) onTimerEnd();
@@ -47,37 +50,49 @@ const useTimer = ({ initialMinutes, onTimerEnd, isIncremental = false }: UseTime
     }
 
     return () => clearInterval(timer);
-  }, [isRunning, isPaused, isIncremental, onTimerEnd, initialMinutes]);
+  }, [isRunning, isPaused, isIncremental, onTimerEnd]);
 
   const startTimer = useCallback(() => {
     setIsRunning(true);
     setIsPaused(false);
+
     if (!startTimestamp.current) {
-      startTimestamp.current = Date.now() - (initialMinutes * 60 - timeLeft) * 1000;
+      startTimestamp.current = Date.now();
     }
-  }, [initialMinutes, timeLeft]);
+  }, []);
 
   const pauseTimer = useCallback(() => {
     setIsPaused(true);
     setIsRunning(false);
-    const now = Date.now();
-    if (startTimestamp.current !== null) {
+
+    if (startTimestamp.current) {
+      const now = Date.now();
       const elapsedSeconds = Math.floor((now - startTimestamp.current) / 1000);
-      setTimeLeft((prevTimeLeft) => (isIncremental ? elapsedSeconds : prevTimeLeft));
+
+      pausedTime.current = isIncremental
+        ? pausedTime.current + elapsedSeconds
+        : Math.max(0, pausedTime.current - elapsedSeconds);
+
+      setTimeLeft(pausedTime.current);
+      startTimestamp.current = null;
     }
-  }, [isIncremental]);
+  }, [isIncremental, initialMinutes]);
 
   const resetTimer = useCallback(() => {
     setIsRunning(false);
     setIsPaused(false);
     setTimeLeft(initialMinutes * 60);
+
+    pausedTime.current = initialMinutes * 60;
     startTimestamp.current = null;
   }, [initialMinutes]);
 
   const setTimer = useCallback(
     (newMinutes: number) => {
       if (!isRunning) {
-        setTimeLeft(newMinutes * 60); // Atualiza o tempo restante em segundos
+        setTimeLeft(newMinutes * 60);
+        pausedTime.current = newMinutes * 60;
+        startTimestamp.current = null;
       }
     },
     [isRunning]
