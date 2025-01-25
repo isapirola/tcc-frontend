@@ -33,20 +33,6 @@
   margin-bottom: 24px;
 }
 
-.errorContainer {
-  display: flex;
-  padding: 8px 16px;
-  border-radius: 16px;
-  border: 1px solid var(--v1);
-  background-color: rgba(94, 19, 23, 0.7);
-  margin-bottom: 16px;
-}
-.errorMessage {
-  color: var(--v1);
-  font-weight: 600;
-  font-size: 18px;
-}
-
 .buttonContainer {
   display: flex;
   flex-direction: column;

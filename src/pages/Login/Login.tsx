@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import styles from "./Login.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, LoadingSpinner, LoginInput } from "../../components";
+import { Button, ErrorAlert, LoadingSpinner, LoginInput } from "../../components";
 import { login } from "../../api";
 import { UserContext } from "../../context/UserContext";
 
@@ -51,11 +51,7 @@ const Login: React.FC = () => {
       </Link>
       <div className={styles.contentContainer}>
         <h2 className={styles.title}>Fazer login</h2>
-        {error && (
-          <div className={styles.errorContainer}>
-            <p className={styles.errorMessage}>{error}</p>
-          </div>
-        )}
+        {error && <ErrorAlert text={error} />}
         <LoginInput
           type="text"
           value={email}

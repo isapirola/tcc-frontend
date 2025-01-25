@@ -9,3 +9,4 @@ export { default as TaskFilters } from "./TaskFilters";
 export { default as TaskList } from "./TaskList";
 export { default as Timer } from "./Timer";
 export { default as LoadingSpinner } from "./LoadingSpinner";
+export { default as ErrorAlert } from "./ErrorAlert";
