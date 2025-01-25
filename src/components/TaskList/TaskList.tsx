@@ -69,6 +69,13 @@ const TaskList: React.FC<TaskListProps> = ({
                 type="text"
                 value={categoryNameInput}
                 onChange={(e) => setCategoryNameInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleEditCategory(category.id, categoryNameInput);
+                    setCategoryToRename(undefined);
+                    setCategoryNameInput("");
+                  }
+                }}
               />
               <div className={styles.categoryRenameButtons}>
                 <Button
