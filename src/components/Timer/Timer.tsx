@@ -39,6 +39,7 @@ const Timer: React.FC<TimerProps> = ({ handleTimerStop }) => {
   const {
     minutes,
     seconds,
+    isTimeZero,
     isRunning,
     isPaused,
     startTimer,
@@ -146,7 +147,7 @@ const Timer: React.FC<TimerProps> = ({ handleTimerStop }) => {
             onClick={() => handleTimerTypeClick(index)}
             isSelected={selectedTimerType === index}
             isDisabled={isRunning}
-            styleType="timers"
+            styleType="timerTypes"
           />
         ))}
       </div>
@@ -162,20 +163,32 @@ const Timer: React.FC<TimerProps> = ({ handleTimerStop }) => {
             </div>
           </div>
           <div className={styles.timerButtonContainer}>
-            <div title="Play/Pause" className={styles.timerButton} onClick={toggleTimer}>
+            <Button
+              title={isTimeZero ? "Adicione tempo primeiro" : "Play/Pause"}
+              styleType="timerButton"
+              isDisabled={isTimeZero}
+              onClick={toggleTimer}>
               {isRunning && !isPaused ? (
                 <PauseIcon className={styles.timerIcon} />
               ) : (
                 <PlayIcon className={styles.timerIcon} />
               )}
-            </div>
-            <div title="Parar" className={styles.timerButton} onClick={stopTimer}>
+            </Button>
+            <Button
+              title={isTimeZero ? "Adicione tempo primeiro" : "Parar"}
+              styleType="timerButton"
+              isDisabled={isTimeZero}
+              onClick={stopTimer}>
               <StopIcon className={styles.timerIcon} />
-            </div>
+            </Button>
             {isPomodoro && (
-              <div title="Próximo" className={styles.timerButton} onClick={handleSkipPomodoro}>
+              <Button
+                title="Próximo"
+                styleType="timerButton"
+                isDisabled={isTimeZero}
+                onClick={handleSkipPomodoro}>
                 <SkipIcon className={styles.timerIcon} />
-              </div>
+              </Button>
             )}
           </div>
         </div>
@@ -188,7 +201,7 @@ const Timer: React.FC<TimerProps> = ({ handleTimerStop }) => {
                 onClick={() => handlePomodoroTypeClick(index)}
                 isDisabled={isRunning}
                 isSelected={selectedPomodoroType === index}
-                styleType="timers"
+                styleType="timerTypes"
               />
             ))}
           </div>
@@ -222,13 +235,13 @@ const Timer: React.FC<TimerProps> = ({ handleTimerStop }) => {
               label="Adicionar Tempo"
               onClick={handleSetCustomTimer}
               isDisabled={isRunning}
-              styleType="timer"
+              styleType="tempControl"
             />
             <Button
               label="Redefinir Timer"
               onClick={redefineTimer}
               isDisabled={isRunning}
-              styleType="timer"
+              styleType="tempControl"
             />
           </div>
         )}

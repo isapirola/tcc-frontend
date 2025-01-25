@@ -29,32 +29,6 @@
   background-color: var(--a6);
 }
 
-.timers {
-  width: 160px;
-  height: 48px;
-  background-color: var(--a4);
-  color: var(--a1);
-}
-.timers:hover {
-  background-color: var(--a7);
-}
-.timers.selected {
-  background-color: var(--a7);
-  color: var(--w);
-}
-.timers.disabled:hover {
-  cursor: default;
-  background-color: var(--a4);
-}
-.timers.selected.disabled:hover {
-  cursor: default;
-  background-color: var(--a7);
-}
-
-.login {
-  width: 240px;
-}
-
 .header {
   background-color: transparent;
 }
@@ -62,9 +36,8 @@
   transform: scale(1.1);
 }
 
-.timer {
-  padding: 8px 12px;
-  font-size: 16px;
+.login {
+  width: 240px;
 }
 
 .category {
@@ -73,11 +46,55 @@
   padding: 6px 16px;
 }
 
+.timerTypes {
+  width: 160px;
+  height: 48px;
+  background-color: var(--a4);
+  color: var(--a1);
+}
+.timerTypes:hover {
+  background-color: var(--a7);
+}
+.timerTypes.selected {
+  background-color: var(--a7);
+  color: var(--w);
+}
+.timerTypes.disabled:hover {
+  cursor: default;
+  background-color: var(--a4);
+}
+.timerTypes.selected.disabled:hover {
+  cursor: default;
+  background-color: var(--a7);
+}
+
+.timerButton {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background-color: var(--a6);
+  padding: 8px;
+}
+.timerButton.disabled {
+  background-color: var(--a4);
+  cursor: default;
+}
+.timerButton.disabled:hover {
+  background-color: var(--a4);
+}
+
+.tempControl {
+  padding: 10px 12px;
+  font-size: 16px;
+}
+
 @media (max-width: 480px) {
   .defaultButton {
     font-size: 16px;
   }
-  .timers {
+  .timerTypes {
     width: 100%;
     font-size: 16px;
     padding: 8px 8px;

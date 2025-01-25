@@ -7,7 +7,7 @@ interface TaskButtonProps {
   onClick: () => void;
   isDisabled?: boolean;
   isSelected?: boolean;
-  styleType?: "timers" | "login" | "header" | "timer" | "category";
+  styleType?: "header" | "login" | "category" | "timerTypes" | "timerButton" | "tempControl";
   children?: React.ReactNode;
 }
 
@@ -22,16 +22,18 @@ const Button: React.FC<TaskButtonProps> = ({
 }) => {
   const getButtonClass = () => {
     switch (styleType) {
-      case "timers":
-        return `${styles.defaultButton} ${styles.timers}`;
-      case "login":
-        return `${styles.defaultButton} ${styles.login}`;
       case "header":
         return `${styles.defaultButton} ${styles.header}`;
-      case "timer":
-        return `${styles.defaultButton} ${styles.timer}`;
+      case "login":
+        return `${styles.defaultButton} ${styles.login}`;
       case "category":
         return `${styles.defaultButton} ${styles.category}`;
+      case "timerTypes":
+        return `${styles.defaultButton} ${styles.timerTypes}`;
+      case "timerButton":
+        return `${styles.defaultButton} ${styles.timerButton}`;
+      case "tempControl":
+        return `${styles.defaultButton} ${styles.tempControl}`;
       default:
         return styles.defaultButton;
     }

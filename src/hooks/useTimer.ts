@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 interface UseTimerProps {
   initialMinutes: number;
@@ -98,12 +98,19 @@ const useTimer = ({ initialMinutes, onTimerEnd, isIncremental = false }: UseTime
     [isRunning]
   );
 
-  const minutes = Math.floor(timeLeft / 60);
-  const seconds = timeLeft % 60;
+  const minutes = useMemo(() => Math.floor(timeLeft / 60), [timeLeft]);
+  const seconds = useMemo(() => timeLeft % 60, [timeLeft]);
+  const isTimeZero = useMemo(() => {
+    if (isIncremental) {
+      return false; // Em modo incremental, nunca será zero
+    }
+    return minutes === 0 && seconds === 0; // Apenas para contagem regressiva
+  }, [minutes, seconds, isIncremental]);
 
   return {
     minutes,
     seconds,
+    isTimeZero,
     isRunning,
     isPaused,
     startTimer,

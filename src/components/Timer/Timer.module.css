@@ -52,20 +52,9 @@
 
 .timerButtonContainer {
   display: flex;
-  padding: 0px 32px;
-  width: 100%;
   justify-content: center;
-  gap: 16px;
-}
-
-.timerButton {
-  cursor: pointer;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  background-color: var(--a6);
-  padding: 8px;
+  gap: 16px;
 }
 
 .timerIcon {
