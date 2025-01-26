@@ -53,7 +53,6 @@ const ModalNewTask: React.FC<ModalNewTaskProps> = ({
       setNotes(taskToEdit.notes);
       setDuration(taskToEdit.duration);
     } else {
-      // Limpa os campos se não houver tarefa para editar
       setTitle("");
       setPriority("");
       setCategory("");
@@ -81,6 +80,7 @@ const ModalNewTask: React.FC<ModalNewTaskProps> = ({
       setTitle("");
       setPriority("");
       setCategory("");
+      setDuration(0);
       setNotes("");
     } catch (err) {
       console.error("Erro ao salvar tarefa:", err);
