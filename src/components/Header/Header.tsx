@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({ isLogged, handleLogout, handleProfile }
 
   return (
     <div className={styles.header}>
-      <h1 className={styles.headerLogo}>TCC da Belinha</h1>
+      <h1 className={styles.headerLogo}>Protótipo TCC</h1>
       <div className={styles.headerIcons}>
         {isLogged && (
           <Button title="Meu Perfil" onClick={handleProfile} styleType="header">

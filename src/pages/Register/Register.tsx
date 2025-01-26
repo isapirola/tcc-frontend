@@ -53,7 +53,7 @@ const Login: React.FC = () => {
   return (
     <div className={styles.mainContainer}>
       <Link to={"/"} className={styles.homeButton}>
-        TCC da Belinha
+        Protótipo TCC
       </Link>
       <div className={styles.contentContainer}>
         <h1 className={styles.title}>Criar conta</h1>

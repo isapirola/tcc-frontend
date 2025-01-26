@@ -47,7 +47,7 @@ const Login: React.FC = () => {
   return (
     <div className={styles.mainContainer}>
       <Link to={"/"} className={styles.homeButton}>
-        TCC da Belinha
+        Protótipo TCC
       </Link>
       <div className={styles.contentContainer}>
         <h2 className={styles.title}>Fazer login</h2>
