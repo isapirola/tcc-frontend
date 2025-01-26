@@ -130,10 +130,10 @@ const Timer: React.FC<TimerProps> = ({ handleTimerStop }) => {
   };
 
   const handleSkipPomodoro = () => {
-    if (selectedPomodoroType === 2) {
+    if (selectedPomodoroType === 0) {
+      handlePomodoroTypeClick(1);
+    } else if (selectedPomodoroType === 1 || selectedPomodoroType === 2) {
       handlePomodoroTypeClick(0);
-    } else {
-      handlePomodoroTypeClick(selectedPomodoroType + 1);
     }
   };
 
