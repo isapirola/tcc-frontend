@@ -169,7 +169,7 @@ const ModalNewTask: React.FC<ModalNewTaskProps> = ({
         </div>
         <div className={styles.buttonContainer}>
           <Button label={"Cancelar"} onClick={onClose} />
-          <Button onClick={handleConfirm}>
+          <Button onClick={handleConfirm} isDisabled={isLoading}>
             {isLoading ? (
               <LoadingSpinner size={18} />
             ) : (
