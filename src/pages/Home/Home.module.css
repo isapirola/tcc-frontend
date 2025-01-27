@@ -61,6 +61,7 @@
 }
 
 .tasksFooter {
+  padding-top: 16px;
   display: flex;
   flex-direction: column;
   margin-top: auto;
