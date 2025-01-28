@@ -3,6 +3,7 @@ import "./App.css";
 import { Home, Login, Register } from "./pages";
 import { UserProvider } from "./context/UserContext";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         </Routes>
       </Router>
       <Analytics />
+      <SpeedInsights />
     </UserProvider>
   );
 }
