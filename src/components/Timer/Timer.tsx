@@ -231,18 +231,20 @@ const Timer: React.FC<TimerProps> = ({ handleTimerStop }) => {
                 />
               </div>
             </div>
-            <Button
-              label="Adicionar Tempo"
-              onClick={handleSetCustomTimer}
-              isDisabled={isRunning}
-              styleType="tempControl"
-            />
-            <Button
-              label="Redefinir Timer"
-              onClick={redefineTimer}
-              isDisabled={isRunning}
-              styleType="tempControl"
-            />
+            <div className={styles.tempButtons}>
+              <Button
+                label="Adicionar Tempo"
+                onClick={handleSetCustomTimer}
+                isDisabled={isRunning}
+                styleType="tempControl"
+              />
+              <Button
+                label="Redefinir Timer"
+                onClick={redefineTimer}
+                isDisabled={isRunning}
+                styleType="tempControl"
+              />
+            </div>
           </div>
         )}
       </div>

@@ -114,6 +114,12 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+.tempButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 @media (max-width: 480px) {
   .mainContainer {
     gap: 24px;
@@ -138,9 +144,11 @@ input[type="number"] {
   }
   .tempContainer {
     flex-direction: row;
-    align-items: flex-end;
   }
   .tempInputs {
     gap: 16px;
+  }
+  .tempButtons {
+    gap: 8px;
   }
 }

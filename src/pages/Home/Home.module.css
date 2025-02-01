@@ -107,6 +107,7 @@
 .taskSelectedContent {
   padding: 16px 24px;
 }
+
 .taskSelectedContent.grid {
   display: grid;
   grid-template-columns: 1fr 0.1fr 2fr;
@@ -204,6 +205,9 @@
     max-width: 100%;
     gap: 24px;
   }
+  .tasksButtons {
+    margin-bottom: 0px;
+  }
   .tasksFooter {
     gap: 12px;
   }
@@ -228,40 +232,37 @@
   }
 
   .taskSelectedContainer {
-    margin-top: 12px;
     margin-bottom: 36px;
-    height: 100%;
-    width: 85%;
   }
 
-  .taskSelectedContainer.grid {
-    padding: 24px 16px;
+  .taskSelectedContent.grid {
     display: grid;
-    grid-template-columns: 2fr 0.1fr 4fr;
-    grid-template-rows: auto;
-    height: fit-content;
-    width: 85%;
-    gap: 8px;
+    grid-template-columns: 1fr; /* Uma única coluna */
+    grid-template-rows: auto; /* Linhas automáticas */
+    gap: 8px; /* Espaçamento entre os itens */
+  }
+
+  .taskNotes {
+    height: auto;
   }
 
   .taskSelectedHeader {
-    font-size: 14px;
-    padding: 6px 12px;
-    top: -20px;
+    padding: 8px 12px;
+    font-size: 12px;
+    gap: 12px;
+  }
+
+  .taskSelectedFinishText {
+    text-align: right;
   }
 
   .taskInfo {
     gap: 8px;
   }
 
-  .taskNotes {
-    gap: 4px;
-    height: 140px;
-  }
-
   .taskInfo p,
   .taskNotes p {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .noTaskSelected {
